@@ -1,0 +1,3585 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MusiqaUstoz — Cholg‘u ta’lim platformasi</title>
+
+<style>
+  
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root{
+ --bg:#f7f5ef;--paper:#fffefa;--ink:#25352e;--muted:#758078;
+ --green:#28634c;--green2:#397d5e;--gold:#c69b4d;--line:#e8e3d8;
+ --shadow:0 12px 35px rgba(48,57,45,.08);
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+button{cursor:pointer}
+header{
+ position:sticky;top:0;z-index:50;background:rgba(255,254,250,.96);
+ backdrop-filter:blur(12px);border-bottom:1px solid var(--line)
+}
+.nav{max-width:1200px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;color:var(--green)}
+.logo span{color:var(--gold)}
+nav{display:flex;gap:19px;flex-wrap:wrap}
+nav a{font-size:13px;font-weight:700;color:#526158}
+nav a:hover{color:var(--green)}
+.menu-btn{display:none;border:0;background:#edf2ec;padding:9px 12px;border-radius:10px}
+.container{max-width:1200px;margin:auto;padding:0 22px}
+.hero{padding:75px 0 65px;background:linear-gradient(115deg,#e8eee4,#f8f3e8)}
+.hero-inner{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}
+.eyebrow{color:var(--green2);font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+h1{font-family:'Playfair Display',serif;font-size:clamp(38px,5vw,62px);line-height:1.12;margin:16px 0;color:#24392e}
+.hero p{color:#68756c;line-height:1.8;max-width:590px}
+.hero-visual{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);height:330px}
+.hero-visual img{width:100%;height:100%;object-fit:cover}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;display:inline-block}
+.btn-primary{background:var(--green);color:white}
+.btn-primary:hover{background:var(--green2)}
+.btn-light{background:#edf2ec;color:var(--green)}
+section{padding:68px 0;scroll-margin-top:80px}
+.section-head{margin-bottom:28px}
+.section-head h2{font-family:'Playfair Display',serif;font-size:35px;margin:8px 0}
+.section-head p{color:var(--muted);line-height:1.7;max-width:700px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.stat{background:var(--paper);padding:20px;border:1px solid var(--line);border-radius:15px}
+.stat strong{font-size:25px;color:var(--green);display:block}
+.stat span{font-size:13px;color:var(--muted)}
+.instrument-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.instrument-card{background:var(--paper);border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.2s;box-shadow:0 5px 18px rgba(40,50,40,.04)}
+.instrument-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.instrument-card img{width:100%;height:205px;object-fit:cover;background:#e9e5dc;display:block}
+.card-body{padding:18px}
+.card-body h3{margin:0 0 8px;font-family:'Playfair Display',serif;font-size:22px}
+.card-body p{color:var(--muted);font-size:13px;line-height:1.65;min-height:43px}
+.tag{display:inline-block;background:#edf3ed;color:var(--green);font-size:11px;font-weight:800;padding:6px 9px;border-radius:20px;margin-bottom:10px}
+.detail{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:var(--shadow);margin-top:28px;display:none}
+.detail.show{display:block}
+.detail-top{display:grid;grid-template-columns: .8fr 1.2fr;gap:25px}
+.detail-top img{width:100%;height:310px;object-fit:cover;border-radius:15px;background:#eee}
+.detail h3{font-family:'Playfair Display',serif;font-size:27px;margin:0 0 10px}
+.detail p{line-height:1.8;color:#68756c}
+.info-box{background:#f6f5ef;padding:17px;border-radius:12px;margin-top:14px}
+.detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.book-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:var(--shadow)}
+.panel h3{font-family:'Playfair Display',serif;font-size:23px;margin-top:0}
+.teacher-card{border:1px solid var(--line);padding:17px;border-radius:13px;background:#fff;margin-top:12px}
+.teacher-card strong{font-size:17px}
+.teacher-card p{font-size:13px;color:var(--muted);line-height:1.6}
+form{display:grid;gap:13px}
+label{font-size:13px;font-weight:700;color:#526158}
+input,select{width:100%;padding:12px;border:1px solid #dddcd3;border-radius:9px;background:white;outline:none}
+input:focus,select:focus{border-color:var(--green)}
+.phone-wrap{display:flex;align-items:center;border:1px solid #dddcd3;border-radius:9px;background:white;overflow:hidden}
+.phone-prefix{padding:12px;background:#edf2ec;color:var(--green);font-weight:800}
+.phone-wrap input{border:0}
+.notice{font-size:12px;color:var(--muted);line-height:1.6}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.video-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:19px}
+.video-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.quiz-box{background:var(--paper);padding:25px;border-radius:17px;border:1px solid var(--line)}
+.quiz-question{padding:16px 0;border-bottom:1px solid var(--line)}
+.quiz-question strong{display:block;margin-bottom:10px}
+.quiz-question label{display:block;padding:8px 10px;margin:5px 0;background:#f7f6f1;border-radius:8px;font-weight:500;cursor:pointer}
+.quiz-question input{width:auto;margin-right:8px}
+.result{margin-top:18px;padding:17px;background:#edf4ed;border-radius:12px;color:var(--green);font-weight:700;display:none}
+.result.show{display:block}
+.history-list{display:grid;gap:10px}
+.history-item{padding:13px;border:1px solid var(--line);border-radius:10px;background:white;font-size:13px}
+footer{background:#263c32;color:#e7eee8;padding:35px 0;margin-top:30px}
+footer p{color:#c1cec5;font-size:13px;line-height:1.7}
+.empty{color:var(--muted);font-size:13px;padding:15px;background:#f7f6f1;border-radius:10px}
+@media(max-width:850px){
+ .hero-inner,.detail-top,.book-layout{grid-template-columns:1fr}
+ .instrument-grid{grid-template-columns:repeat(2,1fr)}
+ .video-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+ .nav{flex-wrap:wrap}.menu-btn{display:block}
+ nav{display:none;width:100%;flex-direction:column;gap:12px;padding:10px 0}
+ nav.open{display:flex}
+ .instrument-grid,.video-grid,.stats{grid-template-columns:1fr}
+ .hero{padding:45px 0}.hero-visual{height:230px}
+ section{padding:48px 0}
+ .section-head h2{font-size:29px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="nav">
+  <a class="logo" href="#home">Musiqa<span>Ustoz</span></a>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <nav id="nav">
+   <a href="#home">Bosh sahifa</a>
+   <a href="#instruments">Cholg‘ular</a>
+   <a href="#videos">Video darslar</a>
+   <a href="#teachers">O‘qituvchilar</a>
+   <a href="#tests">Testlar</a>
+   <a href="#cabinet">Kabinet</a>
+  </nav>
+ </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+ <div class="container hero-inner">
+  <div>
+   <div class="eyebrow">Musiqani o‘rganishning yangi usuli</div>
+   <h1>Har bir cholg‘uda yangi bir olam</h1>
+   <p>MusiqaUstoz — cholg‘u asboblari tarixi, tuzilishi, ijro usullari, video darslar va bilimlarni sinash uchun mo‘ljallangan elektron ta’lim platformasi.</p>
+   <a class="btn btn-primary" href="#instruments">Cholg‘ularni o‘rganish</a>
+   <div class="stats">
+    <div class="stat"><strong>12</strong><span>Cholg‘u asbobi</span></div>
+    <div class="stat"><strong>10</strong><span>Har bir cholg‘u uchun test</span></div>
+    <div class="stat"><strong>1</strong><span>Yagona ta’lim platformasi</span></div>
+   </div>
+  </div>
+  <div class="hero-visual">
+   <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Violin%20.jpg" alt="Musiqa asbobi" onerror="this.src='https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=900'">
+  </div>
+ </div>
+</section>
+
+<section id="instruments">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Elektron ensiklopediya</div>
+   <h2>Cholg‘u asboblari</h2>
+   <p>O‘zingizga kerakli cholg‘uni tanlang. Har bir cholg‘u uchun alohida ma’lumot, rasm, video dars, o‘qituvchi va bilim sinovi mavjud.</p>
+  </div>
+  <div class="instrument-grid" id="instrumentGrid"></div>
+  <div class="detail" id="instrumentDetail"></div>
+ </div>
+</section>
+
+<section id="videos" style="background:#eeeee5">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Amaliy mashg‘ulotlar</div>
+   <h2>Video darslar</h2>
+   <p>Tanlangan cholg‘u bo‘yicha YouTube video darslarini ko‘rish uchun tegishli havoladan foydalaning.</p>
+  </div>
+  <div class="video-grid" id="videoGrid"></div>
+ </div>
+</section>
+
+<section id="teachers">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Ustozlar bilan ta’lim</div>
+   <h2>O‘qituvchilar va darsga yozilish</h2>
+   <p>Har bir cholg‘u uchun bittadan o‘qituvchi profili mavjud. O‘qituvchi ma’lumotlarini o‘zingiz kiritasiz. O‘quvchi esa darsga yozilish formasini to‘ldiradi.</p>
+  </div>
+  <div class="book-layout">
+   <div class="panel">
+    <h3>O‘qituvchi ma’lumotlarini kiritish</h3>
+    <form id="teacherForm">
+     <div><label>O‘qituvchi ism-familiyasi</label><input id="teacherName" required placeholder="Masalan: Aliyev Anvar"></div>
+     <div><label>Cholg‘u asbobi</label><select id="teacherInstrument" required></select></div>
+     <div><label>Telefon raqami</label><div class="phone-wrap"><span class="phone-prefix">+998</span><input id="teacherPhone" inputmode="numeric" maxlength="9" placeholder="901234567" required></div></div>
+     <div><label>Dars vaqti</label><input id="teacherTime" required placeholder="Dushanba–Chorshanba, 14:00"></div>
+     <div><label>Video dars havolasi (ixtiyoriy)</label><input id="teacherVideo" type="url" placeholder="https://..."></div>
+     <button class="btn btn-primary" type="submit">O‘qituvchini saqlash</button>
+    </form>
+    <p class="notice">Har bir cholg‘u uchun bittadan o‘qituvchi saqlanadi. Yangi ma’lumot kiritilsa, shu cholg‘uning oldingi o‘qituvchi ma’lumoti yangilanadi.</p>
+   </div>
+   <div class="panel">
+    <h3>O‘qituvchilar ro‘yxati</h3>
+    <div id="teacherList"><div class="empty">Hozircha o‘qituvchi ma’lumotlari kiritilmagan. Chap tomondagi forma orqali kiriting.</div></div>
+   </div>
+  </div>
+  <div class="panel" style="margin-top:22px">
+   <h3>Darsga yozilish</h3>
+   <p class="notice">Avval cholg‘u va uning o‘qituvchisini tanlang. Keyin o‘quvchi o‘z ma’lumotlarini kiritib, darsga yoziladi.</p>
+   <form id="bookingForm">
+    <div class="book-layout">
+     <div><label>Cholg‘u asbobi</label><select id="bookingInstrument" required></select></div>
+     <div><label>O‘qituvchi</label><select id="bookingTeacher" required><option value="">Avval cholg‘uni tanlang</option></select></div>
+     <div><label>O‘quvchi ism-familiyasi</label><input id="studentName" required placeholder="Ism va familiyangiz"></div>
+     <div><label>Telefon raqami</label><div class="phone-wrap"><span class="phone-prefix">+998</span><input id="studentPhone" inputmode="numeric" maxlength="9" placeholder="901234567" required></div></div>
+     <div><label>Yoshingiz</label><input id="studentAge" type="number" min="5" max="100" required placeholder="Masalan: 18"></div>
+     <div><label>Qulay dars vaqti</label><input id="studentTime" required placeholder="Masalan: 15:00 dan keyin"></div>
+    </div>
+    <button class="btn btn-primary" type="submit">Darsga yozilish</button>
+   </form>
+   <div id="bookingMessage" class="result"></div>
+  </div>
+ </div>
+</section>
+
+<section id="tests" style="background:#eeeee5">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Bilimni mustahkamlash</div>
+   <h2>Cholg‘u bo‘yicha test</h2>
+   <p>Kerakli cholg‘uni tanlang va 10 ta savolga javob bering. Natija test tugashi bilan darhol ko‘rsatiladi.</p>
+  </div>
+  <div class="panel">
+   <label>Test uchun cholg‘uni tanlang</label>
+   <select id="testInstrument"></select>
+   <div id="quizArea" style="margin-top:20px"><div class="empty">Test boshlash uchun cholg‘u asbobini tanlang.</div></div>
+  </div>
+ </div>
+</section>
+
+<section id="cabinet">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">O‘quvchi natijalari</div>
+   <h2>O‘quvchi kabineti</h2>
+   <p>Test natijalari va darsga yozilishlar ushbu brauzerda saqlanadi.</p>
+  </div>
+  <div class="book-layout">
+   <div class="panel">
+    <h3>Test natijalari tarixi</h3>
+    <div id="resultHistory" class="history-list"><div class="empty">Hozircha test natijalari yo‘q.</div></div>
+   </div>
+   <div class="panel">
+    <h3>Darsga yozilganlar</h3>
+    <div id="bookingHistory" class="history-list"><div class="empty">Hozircha darsga yozilishlar yo‘q.</div></div>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container">
+  <div class="logo" style="color:white">Musiqa<span>Ustoz</span></div>
+  <p>Cholg‘u asboblarini o‘rganish, ustozlar bilan bog‘lanish va bilimlarni sinash uchun elektron ta’lim platformasi.</p>
+  <p>© 2026 MusiqaUstoz. Ta’lim va ijod sari birgalikda.</p>
+ </div>
+</footer>
+
+<script>
+const instruments = [
+ {id:"dutor",name:"Dutor",type:"Torli cholg‘u",desc:"Ikki torli, o‘zbek xalq musiqasida keng qo‘llaniladigan cholg‘u.",history:"Dutor Markaziy Osiyo xalqlari orasida qadimdan tarqalgan torli cholg‘u asbobidir. U xalq qo‘shiqlari va mumtoz kuylarni ijro etishda muhim o‘rin tutadi.",parts:"Kosasi, dastasi, pardalari va ikki toridan tashkil topadi.",method:"Torlarini barmoqlar bilan chertish orqali ijro etiladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Dutar.jpg"},
+ {id:"tanbur",name:"Tanbur",type:"Torli cholg‘u",desc:"Uzun dastali, mumtoz musiqa ijrosida ishlatiladigan cholg‘u.",history:"Tanbur Sharq musiqa madaniyatida qadimiy tarixga ega. Maqom ijrochiligida muhim cholg‘ulardan biri hisoblanadi.",parts:"Kosasi, uzun dastasi, pardalari va torlari mavjud.",method:"Torlar maxsus noxun yoki barmoqlar yordamida chertiladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Tanbur.jpg"},
+ {id:"rubob",name:"Rubob",type:"Torli cholg‘u",desc:"Jarangdor tovushga ega, xalq va mumtoz musiqada ishlatiladi.",history:"Rubob Sharq xalqlari musiqa an’analarida keng tarqalgan. Turli hududlarda uning bir necha ko‘rinishlari shakllangan.",parts:"Kosasi, dastasi, pardalari va torlari mavjud.",method:"Torlar barmoqlar yoki mediator yordamida chertiladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Rubab%20instrument.jpg"},
+ {id:" gijjak",name:"G‘ijjak",type:"Kamonsimon cholg‘u",desc:"Kamon yordamida chalinadigan, ohangdor tovushli cholg‘u.",history:"G‘ijjak Markaziy Osiyo musiqa an’analarida qadimdan mavjud. Ansambl va maqom ijrochiligida qo‘llanadi.",parts:"Kosasi, dastasi, torlari va kamonidan iborat.",method:"Kamon torlar ustida yurgizilib, tovush hosil qilinadi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Ghijak.jpg"},
+ {id:"chang",name:"Chang",type:"Torli urma cholg‘u",desc:"Ko‘p torli, maxsus cho‘plar bilan chalinadigan cholg‘u.",history:"Chang qadimiy Sharq cholg‘ularidan biri bo‘lib, o‘zbek xalq cholg‘u ansambllarida ham ishlatiladi.",parts:"Yog‘och korpus, ko‘plab torlar va maxsus urish cho‘plaridan iborat.",method:"Torlariga maxsus cho‘plar bilan urib ijro qilinadi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Santur%20instrument.jpg"},
+ {id:"pianino",name:"Pianino",type:"Klaviaturali cholg‘u",desc:"Klaviatura orqali turli balandlikdagi tovushlarni ijro etadi.",history:"Pianino klaviaturali cholg‘u bo‘lib, XVIII asrda shakllangan fortepiano oilasiga mansub.",parts:"Klaviatura, bolg‘achalar mexanizmi, torlar va korpusdan iborat.",method:"Klaviatura tugmalari bosilganda ichki bolg‘achalar torlarga uriladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Upright%20piano.jpg"},
+ {id:"skripka",name:"Skripka",type:"Kamonsimon cholg‘u",desc:"Klassik va zamonaviy musiqada keng qo‘llaniladigan cholg‘u.",history:"Skripka XVI asrda Yevropada shakllangan. Bugungi kunda orkestr va yakka ijroda keng tarqalgan.",parts:"Korpus, bo‘yin, dastak, to‘rtta tor va kamondan iborat.",method:"Kamon torlar ustida yurgiziladi yoki torlar barmoq bilan chertiladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Violin%20.jpg"},
+ {id:"fleyta",name:"Fleyta",type:"Puflama cholg‘u",desc:"Nafas yordamida chalinadigan, tiniq tovushli cholg‘u.",history:"Fleyta dunyoning ko‘plab xalqlarida uchraydigan qadimiy puflama cholg‘ular oilasiga mansub.",parts:"Quvur, teshiklar, klapanlar va og‘iz qismidan tashkil topadi.",method:"Og‘iz qismiga havo yo‘naltirilib, klapan va teshiklar boshqariladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Western%20concert%20flute.jpg"},
+ {id:"nay",name:"Nay",type:"Puflama cholg‘u",desc:"Sharq mumtoz musiqasida ishlatiladigan puflama cholg‘u.",history:"Nay Sharq xalqlarida qadimdan mavjud bo‘lib, maqom va an’anaviy kuylar ijrosida muhim o‘rin tutadi.",parts:"Asosan ichi bo‘sh quvur va tovush teshiklaridan iborat.",method:"Nayga havo puflash va teshiklarni barmoqlar bilan berkitish orqali chalinadi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Ney%20instrument.jpg"},
+ {id:"doira",name:"Doira",type:"Zarbli cholg‘u",desc:"Ritm va usulni belgilashda ishlatiladigan zarbli cholg‘u.",history:"Doira o‘zbek xalq musiqasi va raqs san’atida qadimdan qo‘llanib keladi.",parts:"Gardish, teri qoplama va ayrim turlarida metall halqachalardan iborat.",method:"Kaft va barmoqlar bilan urib, turli ritmik tovushlar chiqariladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Doira%20instrument.jpg"},
+ {id:"karnay",name:"Karnay",type:"Puflama cholg‘u",desc:"Baland va kuchli tovush chiqaradigan uzun puflama cholg‘u.",history:"Karnay tarixan marosimlar, bayramlar va tantanali tadbirlarda ishlatilgan.",parts:"Uzun metall quvur va kengaygan og‘iz qismidan iborat.",method:"Og‘iz qismiga kuchli havo yuborish orqali tovush hosil qilinadi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Karnay.jpg"},
+ {id:"surnay",name:"Surnay",type:"Puflama cholg‘u",desc:"Bayram va xalq sayillarida jarangdor ovozi bilan tanilgan cholg‘u.",history:"Surnay Markaziy Osiyo va Sharq xalqlarining an’anaviy musiqa madaniyatida keng tarqalgan.",parts:"Quvur, tilcha, tovush teshiklari va kengaygan karnaysimon qismdan iborat.",method:"Tilcha orqali havo yuborilib, teshiklar barmoqlar bilan boshqariladi.",image:"https://commons.wikimedia.org/wiki/Special:FilePath/Surnay.jpg"}
+];
+
+const questionBank = {
+ dutor:[
+ ["Dutor qanday cholg‘u turiga kiradi?",["Torli","Zarbli","Puflama"],0],
+ ["Dutorning asosiy torlari nechta?",["1 ta","2 ta","4 ta"],1],
+ ["Dutor qanday ijro etiladi?",["Kamon bilan","Torlarini chertib","Puflab"],1],
+ ["Dutorning asosiy qismlaridan biri qaysi?",["Kosasi","Klaviaturasi","Kamon"],0],
+ ["Dutor qaysi musiqada keng ishlatiladi?",["Xalq musiqasida","Faqat elektron musiqada","Faqat harbiy musiqada"],0],
+ ["Dutor tovushi qanday hosil bo‘ladi?",["Tor tebranishidan","Havo bosimidan","Metall urilishidan"],0],
+ ["Dutor dastasida nimalar joylashadi?",["Pardalar","Klapanlar","Tugmalar"],0],
+ ["Dutor qaysi cholg‘ular oilasiga yaqin?",["Torli","Puflama","Zarbli"],0],
+ ["Dutorni chalishda asosan nima ishlatiladi?",["Barmoqlar","Kamon","Nafas"],0],
+ ["Dutor ijrosida nima muhim?",["Ritm va ohang","Faqat baland ovoz","Faqat tezlik"],0]
+ ],
+ tanbur:[
+ ["Tanbur qanday cholg‘u?",["Torli","Zarbli","Puflama"],0],
+ ["Tanburning dastasi qanday?",["Uzun","Juda kalta","Dastasiz"],0],
+ ["Tanbur qaysi ijrochilikda muhim?",["Maqom","Faqat marsh","Faqat elektron"],0],
+ ["Tanbur tovushi nimadan hosil bo‘ladi?",["Tor tebranishidan","Havo oqimidan","Teri urilishidan"],0],
+ ["Tanburda pardalar qayerda joylashadi?",["Dastasida","Korpus tagida","Kamonida"],0],
+ ["Tanbur qanday ijro qilinadi?",["Torlarni chertib","Puflab","Kaft bilan urib"],0],
+ ["Tanbur qaysi hudud musiqa an’analarida mashhur?",["Sharq","Faqat Shimoliy Amerika","Faqat Avstraliya"],0],
+ ["Tanbur qanday cholg‘u oilasiga kiradi?",["Torli","Zarbli","Klaviaturali"],0],
+ ["Tanbur ijrosida nima muhim?",["Parda va ohang","Klapan","Membrana"],0],
+ ["Tanbur ansamblda qanday vazifa bajarishi mumkin?",["Melodik ijro","Faqat ritm berish","Faqat shovqin chiqarish"],0]
+ ],
+ rubob:[
+ ["Rubob qanday cholg‘u?",["Torli","Puflama","Zarbli"],0],
+ ["Rubob tovushi nimadan hosil bo‘ladi?",["Tor tebranishidan","Havo puflashdan","Teri urishdan"],0],
+ ["Rubob qanday chalinadi?",["Torlarni chertib","Karnaydek puflab","Kamon bilan doimiy"],0],
+ ["Rubobning asosiy qismlaridan biri qaysi?",["Kosasi","Klaviatura","Membrana"],0],
+ ["Rubob qaysi musiqada ishlatiladi?",["Xalq va mumtoz musiqa","Faqat elektron musiqa","Faqat sport musiqasi"],0],
+ ["Rubob dastasida nima bo‘ladi?",["Pardalar","Klapanlar","Tugmalar"],0],
+ ["Rubob qanday tovush hosil qiladi?",["Jarangdor","Faqat shovqin","Tovushsiz"],0],
+ ["Rubob qaysi oilaga mansub?",["Torli","Puflama","Zarbli"],0],
+ ["Rubobni chalishda nima ishlatiladi?",["Barmoq yoki mediator","Nafas","Kamon har doim"],0],
+ ["Rubob ansamblda qanday rol bajaradi?",["Kuy ijrosi","Faqat zarb","Faqat signal"],0]
+ ],
+ gijjak:[
+ ["G‘ijjak qanday cholg‘u?",["Kamonsimon","Klaviaturali","Zarbli"],0],
+ ["G‘ijjakda tovush qanday hosil qilinadi?",["Kamon bilan torni ishqalash","Puflash","Kaft bilan urish"],0],
+ ["G‘ijjakning muhim qismi qaysi?",["Kamon","Klaviatura","Membrana"],0],
+ ["G‘ijjak qaysi musiqa an’analarida uchraydi?",["Markaziy Osiyo","Faqat Avstraliya","Faqat Amerika"],0],
+ ["G‘ijjakda nima tebranadi?",["Torlar","Havo quvuri","Teri qoplama"],0],
+ ["G‘ijjak qanday ijro etiladi?",["Kamon yordamida","Puflab","Tugma bosib"],0],
+ ["G‘ijjak qaysi cholg‘ular oilasiga kiradi?",["Torli","Puflama","Zarbli"],0],
+ ["G‘ijjakda kuy qanday ifodalanadi?",["Ohang orqali","Faqat ritm bilan","Faqat signal bilan"],0],
+ ["G‘ijjakning kosasi nima vazifa bajaradi?",["Tovushni kuchaytiradi","Havo yuboradi","Ritmni o‘lchaydi"],0],
+ ["G‘ijjak ansamblda qanday vazifa bajaradi?",["Melodik ijro","Faqat zarb","Faqat raqs"],0]
+ ],
+ chang:[
+ ["Chang qanday cholg‘u?",["Torli urma","Puflama","Klaviaturali"],0],
+ ["Chang qanday chalinadi?",["Maxsus cho‘plar bilan urib","Puflab","Kamon bilan"],0],
+ ["Changda tovush nimadan hosil bo‘ladi?",["Tor tebranishidan","Havo bosimidan","Teri qoplamadan"],0],
+ ["Changning asosiy qismi qaysi?",["Torlar","Klapanlar","Pufak"],0],
+ ["Chang qaysi ansamblda ishlatiladi?",["Cholg‘u ansamblida","Faqat sportda","Faqat teatr yoritishida"],0],
+ ["Chang qanday tovush chiqaradi?",["Jarangdor","Tovushsiz","Faqat shovqin"],0],
+ ["Chang torlariga nima bilan uriladi?",["Maxsus cho‘p","Kamon","Nafas"],0],
+ ["Chang qaysi guruhga mansub?",["Torli urma","Puflama","Elektron"],0],
+ ["Chang ijrosida nima muhim?",["Aniq urish va ritm","Nafas olish","Klaviatura"],0],
+ ["Changning torlari qayerga o‘rnatiladi?",["Korpusiga","Kamoniga","Og‘iz qismiga"],0]
+ ],
+ pianino:[
+ ["Pianino qanday cholg‘u?",["Klaviaturali","Puflama","Zarbli"],0],
+ ["Pianinoda tovush qanday hosil bo‘ladi?",["Bolg‘acha torlarga uriladi","Havo puflanadi","Teri uriladi"],0],
+ ["Pianinoda nima bosiladi?",["Klaviatura tugmalari","Torlar qo‘l bilan","Kamon"],0],
+ ["Pianino qaysi cholg‘ular oilasiga kiradi?",["Klaviaturali torli mexanizm","Puflama","Zarbli"],0],
+ ["Pianinoda oq va qora nima mavjud?",["Tugmalar","Kamonlar","Membranalar"],0],
+ ["Pianino qanday ijro imkoniyatiga ega?",["Ko‘p ovozli ijro","Faqat bitta tovush","Faqat ritm"],0],
+ ["Pianino ichida nima bor?",["Torlar va bolg‘achalar","Faqat havo quvuri","Faqat teri"],0],
+ ["Pianinoda tovush balandligi nima bilan belgilanadi?",["Bosilgan tugma bilan","Faqat korpus rangi bilan","Pedal rangi bilan"],0],
+ ["Pianinoda pedal nima uchun ishlatiladi?",["Tovushni boshqarish","Havo puflash","Torni almashtirish"],0],
+ ["Pianino qayerda qo‘llanadi?",["Yakka va ansambl ijrosida","Faqat ko‘chada","Faqat signal berishda"],0]
+ ],
+ skripka:[
+ ["Skripka qanday cholg‘u?",["Kamonsimon","Puflama","Zarbli"],0],
+ ["Skripka nechta torli?",["4 ta","2 ta","8 ta"],0],
+ ["Skripka qanday chalinadi?",["Kamon bilan","Puflab","Kaft bilan urib"],0],
+ ["Skripka qaysi hududda shakllangan?",["Yevropada","Avstraliyada","Janubiy Amerikada"],0],
+ ["Skripkaning asosiy qismi qaysi?",["Korpus","Klaviatura","Og‘iz quvuri"],0],
+ ["Skripka torlari nimadan tebranadi?",["Kamon ishqalanishidan","Havo puflashdan","Teri urishdan"],0],
+ ["Skripkada barmoqlar nima qiladi?",["Tor uzunligini o‘zgartiradi","Havo yuboradi","Membranani uradi"],0],
+ ["Skripka qaysi ansamblda ko‘p uchraydi?",["Simfonik orkestrda","Faqat zarbli guruhda","Faqat puflama guruhda"],0],
+ ["Skripka qanday ijro imkoniyatiga ega?",["Yakka va jamoaviy","Faqat yakka","Faqat ritm"],0],
+ ["Skripka qaysi oilaga kiradi?",["Torli kamonli","Puflama","Zarbli"],0]
+ ],
+ fleyta:[
+ ["Fleyta qanday cholg‘u?",["Puflama","Torli","Zarbli"],0],
+ ["Fleytada tovush qanday hosil bo‘ladi?",["Havo oqimi bilan","Tor chertish bilan","Teri urish bilan"],0],
+ ["Fleytada nima boshqariladi?",["Klapan va teshiklar","Torlar","Kamon"],0],
+ ["Fleyta qaysi orkestrda ishlatiladi?",["Simfonik orkestr","Faqat zarbli ansambl","Faqat torli trio"],0],
+ ["Fleytaning asosiy qismi qaysi?",["Quvur","Kosasi","Membrana"],0],
+ ["Fleyta qanday tovush chiqarishi mumkin?",["Tiniq va jarangdor","Faqat past shovqin","Tovushsiz"],0],
+ ["Fleytada ijrochi nima ishlatadi?",["Nafas","Kamon","Mediator"],0],
+ ["Fleyta qaysi oilaga mansub?",["Puflama","Torli","Zarbli"],0],
+ ["Fleytada tovush balandligi nima bilan o‘zgaradi?",["Teshik va klapanlar bilan","Korpus rangida","Tor soni bilan"],0],
+ ["Fleyta yakka ijroda ishlatiladimi?",["Ha","Yo‘q","Faqat zarb uchun"],0]
+ ],
+ nay:[
+ ["Nay qanday cholg‘u?",["Puflama","Torli","Zarbli"],0],
+ ["Nay qanday chalinadi?",["Puflab","Torni chertib","Kamon bilan"],0],
+ ["Nayning asosiy tuzilishi qanday?",["Ichi bo‘sh quvur","Klaviatura","Korpus va tor"],0],
+ ["Nayda tovush nima orqali hosil bo‘ladi?",["Havo tebranishi","Tor tebranishi","Teri urilishi"],0],
+ ["Nay qaysi musiqa an’analarida muhim?",["Sharq mumtoz musiqasida","Faqat rok musiqada","Faqat elektron musiqada"],0],
+ ["Nayda barmoqlar nima qiladi?",["Teshiklarni berkitadi","Torni chertadi","Kamonni ushlaydi"],0],
+ ["Nay qaysi cholg‘u turiga kiradi?",["Puflama","Zarbli","Klaviaturali"],0],
+ ["Nay ijrochisi nimaga e’tibor beradi?",["Nafas va ohangga","Kamon tezligiga","Tor tarangligiga"],0],
+ ["Nayning ichki qismi qanday?",["Bo‘sh quvur","Qattiq yog‘och to‘siq","Ko‘p torli"],0],
+ ["Nay qanday musiqa ijrosida qo‘llanadi?",["An’anaviy kuylar","Faqat signal","Faqat zarb"],0]
+ ],
+ doira:[
+ ["Doira qanday cholg‘u?",["Zarbli","Torli","Puflama"],0],
+ ["Doira qanday chalinadi?",["Kaft va barmoqlar bilan urib","Puflab","Tor chertib"],0],
+ ["Doiraning asosiy qismi nima?",["Gardish va teri","Klaviatura","Uzun quvur"],0],
+ ["Doira nimani belgilashda muhim?",["Ritm va usulni","Faqat ohang balandligini","Faqat kuy nomini"],0],
+ ["Doira qaysi san’atda ko‘p ishlatiladi?",["Xalq raqsi va musiqasida","Faqat opera dekoratsiyasida","Faqat elektron musiqada"],0],
+ ["Doira qanday guruhga kiradi?",["Zarbli","Torli","Puflama"],0],
+ ["Doira tovushi nimadan hosil bo‘ladi?",["Teri tebranishidan","Tor chertishdan","Havo quvuridan"],0],
+ ["Doirada barmoqlar nima uchun ishlatiladi?",["Turli zarblar chiqarish uchun","Klapan ochish uchun","Tor sozlash uchun"],0],
+ ["Doira ijrosida nima muhim?",["Ritm aniqligi","Nafas balandligi","Parda soni"],0],
+ ["Doira ansamblda qanday vazifa bajaradi?",["Ritmik jo‘r bo‘ladi","Faqat kuy matnini o‘qiydi","Tovushni yozib oladi"],0]
+ ],
+ karnay:[
+ ["Karnay qanday cholg‘u?",["Puflama","Torli","Zarbli"],0],
+ ["Karnay qanday tovush chiqaradi?",["Baland va kuchli","Juda past va sekin","Tovushsiz"],0],
+ ["Karnay qaysi tadbirlarda ishlatilgan?",["Bayram va tantanalarda","Faqat kutubxonada","Faqat sport mashqida"],0],
+ ["Karnayning asosiy qismi nima?",["Uzun metall quvur","Torli korpus","Klaviatura"],0],
+ ["Karnayda tovush qanday hosil bo‘ladi?",["Havo yuborish orqali","Torni chertish orqali","Teri urish orqali"],0],
+ ["Karnay qaysi oilaga kiradi?",["Puflama","Zarbli","Torli"],0],
+ ["Karnayning og‘iz qismi nima uchun?",["Havo yuborish uchun","Torni sozlash uchun","Ritm urish uchun"],0],
+ ["Karnay qanday vazifada ishlatilgan?",["Tantanali signal va musiqa","Faqat yozuv","Faqat raqs kiyimi"],0],
+ ["Karnay ijrochisi nimadan foydalanadi?",["Nafas","Kamon","Mediator"],0],
+ ["Karnayning tovushi qanday tarqaladi?",["Kuchli va uzoqqa eshitiladi","Faqat quloqchin orqali","Faqat yozuvda"],0]
+ ],
+ surnay:[
+ ["Surnay qanday cholg‘u?",["Puflama","Torli","Zarbli"],0],
+ ["Surnay qayerda ko‘p ishlatiladi?",["Xalq sayillari va bayramlarda","Faqat kutubxonada","Faqat laboratoriyada"],0],
+ ["Surnay tovushi qanday?",["Jarangdor","Tovushsiz","Faqat past shovqin"],0],
+ ["Surnay qanday chalinadi?",["Havo puflab","Tor chertib","Kamon bilan"],0],
+ ["Surnayning asosiy qismlaridan biri qaysi?",["Tilcha","Klaviatura","Membrana"],0],
+ ["Surnayda tovush nimadan hosil bo‘ladi?",["Havo va tilcha tebranishidan","Tor tebranishidan","Teri urilishidan"],0],
+ ["Surnay qaysi cholg‘ular oilasiga mansub?",["Puflama","Torli","Zarbli"],0],
+ ["Surnayda barmoqlar nima qiladi?",["Tovush teshiklarini boshqaradi","Torlarni chertadi","Kamonni tortadi"],0],
+ ["Surnay qaysi musiqada uchraydi?",["An’anaviy xalq musiqasida","Faqat elektron musiqada","Faqat jim ijroda"],0],
+ ["Surnay ansamblda qanday rol bajarishi mumkin?",["Kuy va ohang ijro etadi","Faqat zarb beradi","Faqat yozuv saqlaydi"],0]
+ ]
+};
+
+const $ = id => document.getElementById(id);
+const getStore = (key, fallback=[]) => {
+ try{return JSON.parse(localStorage.getItem(key)) || fallback}catch(e){return fallback}
+};
+const setStore = (key,value)=>localStorage.setItem(key,JSON.stringify(value));
+
+function toggleMenu(){ $("nav").classList.toggle("open"); }
+document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>$("nav").classList.remove("open")));
+
+function imageFallback(img){
+ img.onerror=null;
+ img.src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=900";
+}
+
+function fillInstrumentSelects(){
+ ["teacherInstrument","bookingInstrument","testInstrument"].forEach(id=>{
+  const el=$(id);
+  el.innerHTML=instruments.map(i=>`<option value="${i.id}">${i.name}</option>`).join("");
+ });
+}
+fillInstrumentSelects();
+
+function renderInstruments(){
+ $("instrumentGrid").innerHTML=instruments.map(i=>`
+  <article class="instrument-card">
+   <img src="${i.image}" alt="${i.name}" onerror="imageFallback(this)">
+   <div class="card-body">
+    <span class="tag">${i.type}</span>
+    <h3>${i.name}</h3>
+    <p>${i.desc}</p>
+    <button class="btn btn-primary" onclick="openInstrument('${i.id}')">Ensiklopediyani ochish</button>
+   </div>
+  </article>
+ `).join("");
+}
+renderInstruments();
+
+function openInstrument(id){
+ const i=instruments.find(x=>x.id===id);
+ if(!i)return;
+ $("instrumentDetail").classList.add("show");
+ $("instrumentDetail").innerHTML=`
+  <div class="detail-top">
+   <img src="${i.image}" alt="${i.name}" onerror="imageFallback(this)">
+   <div>
+    <span class="tag">${i.type}</span>
+    <h3>${i.name} ensiklopediyasi</h3>
+    <p>${i.desc}</p>
+    <div class="info-box"><b>Tarixi</b><p>${i.history}</p></div>
+    <div class="info-box"><b>Tuzilishi</b><p>${i.parts}</p></div>
+    <div class="info-box"><b>Ijro usuli</b><p>${i.method}</p></div>
+    <div class="detail-actions">
+     <button class="btn btn-primary" onclick="selectTest('${i.id}')">10 ta testni ishlash</button>
+     <button class="btn btn-light" onclick="selectVideo('${i.id}')">Video darslar</button>
+     <button class="btn btn-light" onclick="selectTeacher('${i.id}')">O‘qituvchini ko‘rish</button>
+    </div>
+   </div>
+  </div>`;
+ $("instrumentDetail").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function selectTest(id){
+ $("testInstrument").value=id;
+ renderQuiz(id);
+ $("tests").scrollIntoView({behavior:"smooth"});
+}
+function selectVideo(id){
+ renderVideos(id);
+ $("videos").scrollIntoView({behavior:"smooth"});
+}
+function selectTeacher(id){
+ $("bookingInstrument").value=id;
+ updateBookingTeacher();
+ $("teachers").scrollIntoView({behavior:"smooth"});
+}
+
+function renderVideos(selectedId){
+ const list=selectedId?instruments.filter(i=>i.id===selectedId):instruments;
+ $("videoGrid").innerHTML=list.map(i=>`
+  <div class="video-card">
+   <span class="tag">${i.type}</span>
+   <h3>${i.name} video darslari</h3>
+   <p>${i.name} cholg‘usini o‘rganish, sozlash va ijro etish bo‘yicha videolar.</p>
+   <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(i.name+' cholg‘usi darslari o‘zbekcha')}">YouTube darslarini ko‘rish</a>
+  </div>`).join("");
+}
+renderVideos();
+
+function teachers(){return getStore("musicTeachers",[])}
+function renderTeachers(){
+ const list=teachers();
+ $("teacherList").innerHTML=list.length?list.map(t=>`
+  <div class="teacher-card">
+   <strong>${escapeHTML(t.name)}</strong>
+   <p>Cholg‘u: ${instrumentName(t.instrument)}<br>
+   Telefon: <a href="tel:+998${t.phone}">+998 ${t.phone}</a><br>
+   Dars vaqti: ${escapeHTML(t.time)}</p>
+   ${t.video?`<a class="btn btn-light" href="${escapeAttr(t.video)}" target="_blank" rel="noopener">Video dars</a>`:""}
+  </div>`).join(""):'<div class="empty">Hozircha o‘qituvchi ma’lumotlari kiritilmagan.</div>';
+ updateBookingTeacher();
+}
+function instrumentName(id){return instruments.find(i=>i.id===id)?.name||id}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return escapeHTML(s)}
+$("teacherForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const phone=$("teacherPhone").value.replace(/\D/g,"");
+ if(phone.length!==9){alert("Telefon raqamidan keyin 9 ta raqam kiriting.");return}
+ const id=$("teacherInstrument").value;
+ const list=teachers().filter(t=>t.instrument!==id);
+ list.push({
+  name:$("teacherName").value.trim(),instrument:id,phone,
+  time:$("teacherTime").value.trim(),video:$("teacherVideo").value.trim()
+ });
+ setStore("musicTeachers",list);
+ e.target.reset();
+ renderTeachers();
+ alert("O‘qituvchi ma’lumotlari saqlandi.");
+});
+
+function updateBookingTeacher(){
+ const id=$("bookingInstrument").value;
+ const teacher=teachers().find(t=>t.instrument===id);
+ $("bookingTeacher").innerHTML=teacher
+  ?`<option value="${id}">${escapeHTML(teacher.name)}</option>`
+  :'<option value="">Bu cholg‘u uchun o‘qituvchi hali kiritilmagan</option>';
+}
+$("bookingInstrument").addEventListener("change",updateBookingTeacher);
+
+$("bookingForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const id=$("bookingInstrument").value;
+ const teacher=teachers().find(t=>t.instrument===id);
+ if(!teacher){alert("Avval shu cholg‘u uchun o‘qituvchi ma’lumotini kiriting.");return}
+ const phone=$("studentPhone").value.replace(/\D/g,"");
+ if(phone.length!==9){alert("Telefon raqamidan keyin 9 ta raqam kiriting.");return}
+ const booking={
+  instrument:id,teacher:teacher.name,
+  student:$("studentName").value.trim(),
+  phone,age:$("studentAge").value,
+  time:$("studentTime").value.trim(),
+  date:new Date().toLocaleString("uz-UZ")
+ };
+ const list=getStore("musicBookings");
+ list.unshift(booking);setStore("musicBookings",list);
+ $("bookingMessage").textContent="Yozilishingiz saqlandi! "+booking.student+", siz "+instrumentName(id)+" bo‘yicha "+teacher.name+" ustozning darsiga yozildingiz.";
+ $("bookingMessage").classList.add("show");
+ e.target.reset();
+ renderCabinet();
+});
+
+function renderQuiz(id){
+ const questions=questionBank[id]||[];
+ if(!questions.length){$("quizArea").innerHTML='<div class="empty">Bu cholg‘u uchun test topilmadi.</div>';return}
+ $("quizArea").innerHTML=`
+  <div class="quiz-box">
+   <h3>${instrumentName(id)} — 10 ta test savoli</h3>
+   <form id="quizForm">
+    ${questions.map((q,n)=>`
+     <div class="quiz-question">
+      <strong>${n+1}. ${q[0]}</strong>
+      ${q[1].map((a,k)=>`<label><input type="radio" name="q${n}" value="${k}" required>${a}</label>`).join("")}
+     </div>`).join("")}
+    <button class="btn btn-primary" type="submit">Testni yakunlash</button>
+   </form>
+   <div class="result" id="quizResult"></div>
+  </div>`;
+ $("quizForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const data=new FormData(e.target);
+  let score=0;
+  questions.forEach((q,n)=>{if(Number(data.get("q"+n))===q[2])score++});
+  const percent=score*10;
+  const message=score>=9?"A’lo natija!":score>=7?"Yaxshi natija!":score>=5?"Qoniqarli. Yana mashq qiling.":"Yana o‘rganib, qayta urinib ko‘ring.";
+  const result=$("quizResult");
+  result.innerHTML=`Natija: ${score}/10 (${percent}%). ${message}`;
+  result.classList.add("show");
+  const history=getStore("musicResults");
+  history.unshift({instrument:id,score,total:10,date:new Date().toLocaleString("uz-UZ")});
+  setStore("musicResults",history);
+  renderCabinet();
+ });
+}
+$("testInstrument").addEventListener("change",e=>renderQuiz(e.target.value));
+renderQuiz(instruments[0].id);
+
+function renderCabinet(){
+ const results=getStore("musicResults");
+ $("resultHistory").innerHTML=results.length?results.map(r=>`
+  <div class="history-item"><b>${instrumentName(r.instrument)}</b> — ${r.score}/${r.total} ball<br><span class="notice">${r.date}</span></div>
+ `).join(""):'<div class="empty">Hozircha test natijalari yo‘q.</div>';
+ const bookings=getStore("musicBookings");
+ $("bookingHistory").innerHTML=bookings.length?bookings.map(b=>`
+  <div class="history-item"><b>${escapeHTML(b.student)}</b><br>
+   Cholg‘u: ${instrumentName(b.instrument)}<br>
+   O‘qituvchi: ${escapeHTML(b.teacher)}<br>
+   Telefon: <a href="tel:+998${b.phone}">+998 ${b.phone}</a><br>
+   Dars vaqti: ${escapeHTML(b.time)}<br>
+   <span class="notice">${b.date}</span>
+  </div>`).join(""):'<div class="empty">Hozircha darsga yozilishlar yo‘q.</div>';
+}
+renderTeachers();
+renderCabinet();
+
+["teacherPhone","studentPhone"].forEach(id=>{
+ $(id).addEventListener("input",e=>{
+  e.target.value=e.target.value.replace(/\D/g,"").slice(0,9);
+ });
+});
+
+
+
+
+
+</script>
+
+<style>
+/* ===== MUSIQAUSTOZ: BOSH SAHIFA DIZAYNI ===== */
+
+.hero{
+ background:linear-gradient(120deg,#e8f0e7,#f8f3e8);
+ padding:75px 0;
+}
+.hero-visual{
+ height:390px;
+ padding:10px;
+ background:#fff;
+ border-radius:25px;
+ box-shadow:0 18px 45px rgba(35,65,45,.15);
+}
+.hero-collage{
+ height:100%;
+ display:grid;
+ grid-template-columns:1.2fr .8fr;
+ grid-template-rows:1fr 1fr;
+ gap:9px;
+ overflow:hidden;
+ border-radius:17px;
+}
+.hero-collage img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block;
+}
+.hero-collage .main-photo{
+ grid-row:1/3;
+}
+.hero-collage .small-photo{
+ min-height:0;
+}
+.instrument-card{
+ border-radius:19px;
+ overflow:hidden;
+ transition:.25s;
+}
+.instrument-card:hover{
+ transform:translateY(-7px);
+ box-shadow:0 16px 35px rgba(35,65,45,.13);
+}
+.instrument-card img{
+ height:225px;
+ object-fit:cover;
+}
+.btn{
+ transition:.2s;
+}
+.btn:hover{
+ transform:translateY(-2px);
+}
+.schedule-days{
+ display:grid;
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:9px;
+ margin-top:10px;
+}
+.schedule-days label{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ padding:10px;
+ border:1px solid #e1e8df;
+ border-radius:9px;
+ background:#fff;
+ cursor:pointer;
+}
+.schedule-days input{
+ width:auto;
+ accent-color:#28634c;
+}
+.schedule-row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+.schedule-note{
+ color:#758078;
+ font-size:12px;
+ margin-top:7px;
+}
+@media(max-width:600px){
+ .hero-visual{height:270px}
+ .schedule-days{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .schedule-row{grid-template-columns:1fr}
+}
+</style>
+
+<script>
+/* ===== MUSIQAUSTOZ: JADVAL VA RASMLARNI TUZATISH ===== */
+
+(function(){
+
+ const $ = id => document.getElementById(id);
+
+ // G‘ijjak ID dagi ortiqcha bo‘sh joyni tuzatish
+ instruments.forEach(i => i.id = i.id.trim());
+
+ 
+
+ 
+
+ // Bosh sahifadagi umumiy musiqa kollaji
+ const hero=$(".hero-visual");
+ if(hero){
+  hero.innerHTML=`
+   <div class="hero-collage">
+    <img class="main-photo"
+     src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=900"
+     alt="Musiqa ansambli">
+    <img class="small-photo"
+     src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600"
+     alt="Torli cholg‘u">
+    <img class="small-photo"
+     src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=600"
+     alt="Klaviaturali cholg‘u">
+   </div>`;
+ }
+
+ // Cholg‘u rasmlarini yangilash
+ renderInstruments();
+
+ // Kunlar va vaqtlar
+ const days=[
+  "Dushanba","Seshanba","Chorshanba","Payshanba",
+  "Juma","Shanba","Yakshanba"
+ ];
+
+ const times=[];
+ for(let h=8;h<=20;h++){
+  for(let m of ["00","30"]){
+   if(h===20 && m==="30") continue;
+   times.push(String(h).padStart(2,"0")+":"+m);
+  }
+ }
+
+ function options(items,placeholder){
+  return `<option value="">${placeholder}</option>`+
+   items.map(x=>`<option value="${x}">${x}</option>`).join("");
+ }
+
+ // Eski forma hodisalarini olib tashlab, formalarni yangilash
+ const oldTeacher=$("teacherForm");
+ const teacherForm=oldTeacher.cloneNode(true);
+ oldTeacher.replaceWith(teacherForm);
+
+ const oldBooking=$("bookingForm");
+ const bookingForm=oldBooking.cloneNode(true);
+ oldBooking.replaceWith(bookingForm);
+
+ // O‘qituvchi cholg‘u tanlovi
+ $("teacherInstrument").innerHTML=
+  options(instruments.map(i=>i.id),"Cholg‘u asbobini tanlang");
+
+ $("teacherInstrument").querySelectorAll("option").forEach((o,index)=>{
+  if(index>0) o.textContent=instrumentName(o.value);
+ });
+
+ // O‘qituvchi jadvali
+ const teacherTime=$("teacherTime");
+ teacherTime.required=false;
+ teacherTime.type="hidden";
+
+ const timeParent=teacherTime.parentElement;
+ timeParent.innerHTML=`
+  <label>Hafta kunlarini belgilang</label>
+  <div class="schedule-days">
+   ${days.map((d,n)=>`
+    <label>
+     <input type="checkbox" name="teacherDays" value="${d}">
+     ${d}
+    </label>`).join("")}
+  </div>
+  <div class="schedule-row" style="margin-top:14px">
+   <div>
+    <label for="teacherStart">Dars boshlanish vaqti</label>
+    <select id="teacherStart" required>${options(times,"Boshlanish vaqtini tanlang")}</select>
+   </div>
+   <div>
+    <label for="teacherEnd">Dars tugash vaqti</label>
+    <select id="teacherEnd" required>${options(times,"Tugash vaqtini tanlang")}</select>
+   </div>
+  </div>
+  <input id="teacherTime" type="hidden">
+  <div class="schedule-note">Kunlarni belgilab, boshlanish va tugash vaqtini ro‘yxatdan tanlang.</div>
+ `;
+
+ // O‘quvchi formasi
+ $("bookingInstrument").innerHTML=
+  options(instruments.map(i=>i.id),"Cholg‘u asbobini tanlang");
+
+ $("bookingInstrument").querySelectorAll("option").forEach((o,index)=>{
+  if(index>0) o.textContent=instrumentName(o.value);
+ });
+
+ const studentTime=$("studentTime");
+ const studentTimeParent=studentTime.parentElement;
+
+ studentTimeParent.innerHTML=`
+  <label for="studentDay">Dars kuni</label>
+  <select id="studentDay" required>
+   <option value="">Avval cholg‘u va ustozni tanlang</option>
+  </select>
+  <label for="studentTime" style="display:block;margin-top:10px">Dars soati</label>
+  <select id="studentTime" required>
+   <option value="">Avval kunni tanlang</option>
+  </select>
+ `;
+
+ $("testInstrument").innerHTML=
+  options(instruments.map(i=>i.id),"Cholg‘u asbobini tanlang");
+
+ $("testInstrument").querySelectorAll("option").forEach((o,index)=>{
+  if(index>0) o.textContent=instrumentName(o.value);
+ });
+
+ $("quizArea").innerHTML=
+  '<div class="empty">Test boshlash uchun cholg‘u asbobini tanlang.</div>';
+
+ // Telefon raqami: faqat 9 ta raqam
+ ["teacherPhone","studentPhone"].forEach(id=>{
+  $(id).addEventListener("input",e=>{
+   e.target.value=e.target.value.replace(/\D/g,"").slice(0,9);
+  });
+ });
+
+ function teacherList(){
+  return getStore("musicTeachers",[]);
+ }
+
+ // O‘qituvchini saqlash
+ teacherForm.addEventListener("submit",e=>{
+  e.preventDefault();
+
+  const name=$("teacherName").value.trim();
+  const instrument=$("teacherInstrument").value;
+  const phone=$("teacherPhone").value.replace(/\D/g,"");
+  const start=$("teacherStart").value;
+  const end=$("teacherEnd").value;
+  const selectedDays=[
+   ...teacherForm.querySelectorAll('input[name="teacherDays"]:checked')
+  ].map(x=>x.value);
+
+  if(!instrument){
+   alert("Cholg‘u asbobini tanlang.");
+   return;
+  }
+  if(phone.length!==9){
+   alert("Telefon raqamiga 9 ta raqam kiriting.");
+   return;
+  }
+  if(selectedDays.length===0){
+   alert("Kamida bitta hafta kunini belgilang.");
+   return;
+  }
+  if(!start || !end || end<=start){
+   alert("Dars tugash vaqti boshlanish vaqtidan keyin bo‘lishi kerak.");
+   return;
+  }
+
+  const list=teacherList().filter(t=>t.instrument!==instrument);
+
+  list.push({
+   name,
+   instrument,
+   phone,
+   days:selectedDays,
+   start,
+   end,
+   time:selectedDays.join(", ")+" | "+start+"–"+end,
+   video:$("teacherVideo").value.trim()
+  });
+
+  setStore("musicTeachers",list);
+  teacherForm.reset();
+  renderTeachers();
+  alert("O‘qituvchi va dars jadvali saqlandi!");
+ });
+
+ // O‘qituvchilar ro‘yxati
+ window.renderTeachers=function(){
+  const list=teacherList();
+
+  $("teacherList").innerHTML=list.length
+   ?list.map(t=>`
+    <div class="teacher-card">
+     <strong>${escapeHTML(t.name)}</strong>
+     <p>
+      Cholg‘u: ${instrumentName(t.instrument)}<br>
+      Telefon: <a href="tel:+998${t.phone}">+998 ${t.phone}</a><br>
+      Hafta kunlari: ${escapeHTML((t.days||[]).join(", ")||"Jadvalni qayta kiriting")}<br>
+      Dars vaqti: ${escapeHTML(t.start&&t.end?t.start+"–"+t.end:t.time)}
+     </p>
+     ${t.video?`<a class="btn btn-light" href="${escapeAttr(t.video)}" target="_blank">Video dars</a>`:""}
+    </div>
+   `).join("")
+   :'<div class="empty">Hozircha o‘qituvchi kiritilmagan.</div>';
+
+  updateBookingTeacher();
+ };
+
+ // O‘quvchiga faqat shu cholg‘u ustozini chiqarish
+ window.updateBookingTeacher=function(){
+  const id=$("bookingInstrument").value;
+  const teacher=teacherList().find(t=>t.instrument===id);
+
+  $("bookingTeacher").innerHTML=teacher
+   ?`<option value="${id}">${escapeHTML(teacher.name)}</option>`
+   :'<option value="">Bu cholg‘u uchun o‘qituvchi kiritilmagan</option>';
+
+  $("studentDay").innerHTML=
+   '<option value="">Dars kunini tanlang</option>';
+
+  $("studentTime").innerHTML=
+   '<option value="">Avval kunni tanlang</option>';
+
+  if(teacher && teacher.days && teacher.days.length){
+   $("studentDay").innerHTML=
+    options(teacher.days,"Dars kunini tanlang");
+  }
+ };
+
+ $("bookingInstrument").addEventListener("change",updateBookingTeacher);
+
+ // Tanlangan kunga mos bo‘sh vaqtlar
+ $("studentDay").addEventListener("change",()=>{
+  const id=$("bookingInstrument").value;
+  const teacher=teacherList().find(t=>t.instrument===id);
+  const day=$("studentDay").value;
+
+  if(!teacher || !day || !teacher.start || !teacher.end){
+   $("studentTime").innerHTML=
+    '<option value="">Vaqt mavjud emas</option>';
+   return;
+  }
+
+  const available=times.filter(t=>t>=teacher.start && t<teacher.end);
+
+  $("studentTime").innerHTML=options(
+   available,
+   available.length?"Dars soatini tanlang":"Bo‘sh vaqt mavjud emas"
+  );
+ });
+
+ // Darsga yozilish
+ bookingForm.addEventListener("submit",e=>{
+  e.preventDefault();
+
+  const id=$("bookingInstrument").value;
+  const teacher=teacherList().find(t=>t.instrument===id);
+  const phone=$("studentPhone").value.replace(/\D/g,"");
+  const day=$("studentDay").value;
+  const time=$("studentTime").value;
+
+  if(!teacher){
+   alert("Avval shu cholg‘u uchun o‘qituvchi kiriting.");
+   return;
+  }
+  if(phone.length!==9){
+   alert("Telefon raqamiga 9 ta raqam kiriting.");
+   return;
+  }
+  if(!day || !time){
+   alert("Dars kuni va soatini tanlang.");
+   return;
+  }
+
+  const booking={
+   instrument:id,
+   teacher:teacher.name,
+   student:$("studentName").value.trim(),
+   phone,
+   age:$("studentAge").value,
+   day,
+   time,
+   date:new Date().toLocaleString("uz-UZ")
+  };
+
+  const list=getStore("musicBookings");
+  list.unshift(booking);
+  setStore("musicBookings",list);
+
+  $("bookingMessage").textContent=
+   "Yozilishingiz saqlandi! "+booking.student+
+   " — "+instrumentName(id)+", ustoz: "+teacher.name+
+   ", "+day+" kuni, soat "+time+".";
+
+  $("bookingMessage").classList.add("show");
+  bookingForm.reset();
+  updateBookingTeacher();
+  renderCabinet();
+ });
+
+ // Kabinetda kun va soatni ko‘rsatish
+ const oldRenderCabinet=window.renderCabinet;
+
+ window.renderCabinet=function(){
+  const results=getStore("musicResults");
+
+  $("resultHistory").innerHTML=results.length
+   ?results.map(r=>`
+    <div class="history-item">
+     <b>${instrumentName(r.instrument)}</b> — ${r.score}/${r.total} ball<br>
+     <span class="notice">${r.date}</span>
+    </div>
+   `).join("")
+   :'<div class="empty">Hozircha test natijalari yo‘q.</div>';
+
+  const bookings=getStore("musicBookings");
+
+  $("bookingHistory").innerHTML=bookings.length
+   ?bookings.map(b=>`
+    <div class="history-item">
+     <b>${escapeHTML(b.student)}</b><br>
+     Cholg‘u: ${instrumentName(b.instrument)}<br>
+     O‘qituvchi: ${escapeHTML(b.teacher)}<br>
+     Telefon: <a href="tel:+998${b.phone}">+998 ${b.phone}</a><br>
+     Hafta kuni: ${escapeHTML(b.day||"Ko‘rsatilmagan")}<br>
+     Dars soati: ${escapeHTML(b.time)}<br>
+     <span class="notice">${b.date}</span>
+    </div>
+   `).join("")
+   :'<div class="empty">Hozircha darsga yozilishlar yo‘q.</div>';
+ };
+
+ renderTeachers();
+ renderCabinet();
+
+})();
+</script>
+
+<style>
+/* MUSIQAUSTOZ — YANGI DIZAYN */
+.hero{
+  background:linear-gradient(120deg,#e6eee5,#f8f1e4);
+  padding:82px 0 72px;
+}
+.hero-visual{
+  height:390px;
+  border-radius:26px;
+  overflow:hidden;
+  border:7px solid rgba(255,255,255,.8);
+  box-shadow:0 20px 45px rgba(36,57,46,.16);
+}
+.hero-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s;
+}
+.hero-visual:hover img{transform:scale(1.04)}
+
+.instrument-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+.instrument-card{
+  background:#fffefa;
+  border:1px solid #e6e5d9;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(38,60,50,.07);
+  transition:transform .25s,box-shadow .25s;
+}
+.instrument-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 18px 35px rgba(38,60,50,.14);
+}
+.instrument-card img{
+  width:100%;
+  height:225px;
+  object-fit:contain;
+  padding:12px;
+  display:block;
+  background:linear-gradient(145deg,#f5f3e9,#e9eee6);
+}
+.card-body{padding:20px}
+.card-body h3{
+  font-size:23px;
+  color:#28634c;
+  margin:5px 0 10px;
+}
+.card-body p{
+  min-height:48px;
+  line-height:1.7;
+}
+.card-body .btn{
+  margin-top:8px;
+  transition:.2s;
+}
+.card-body .btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 15px rgba(40,99,76,.2);
+}
+@media(max-width:850px){
+ .instrument-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero-visual{height:300px}
+}
+@media(max-width:550px){
+ .instrument-grid{grid-template-columns:1fr}
+ .hero-visual{height:240px}
+}
+</style>
+
+<script>
+/* HAR BIR CHOLG'U UCHUN ALOHIDA HAQIQIY RASM */
+(function(){
+
+  // G‘ijjak ID dagi ortiqcha bo‘shliqni tuzatish
+  instruments.forEach(item=>{
+    item.id=item.id.trim();
+  });
+
+  const photoFiles={
+    dutor:"Dutor 1.png",
+    tanbur:"Tanbur.png",
+    rubob:"Kashgari rubab.PNG",
+    gijjak:"G'ijjak.png",
+    chang:"Chang chalayotgan sozandalar.png",
+    pianino:"Upright piano.jpg",
+    skripka:"Violin musical instrument.jpg",
+    fleyta:"Western Concert Flute.jpg",
+    nay:"Nay chalayotgan sozanda.png",
+    doira:"Doira 2.png",
+    karnay:"Karnay 2.png",
+    surnay:"Surnay.png"
+  };
+
+  function commonsImage(file){
+    return "https://commons.wikimedia.org/wiki/Special:FilePath/"
+      +encodeURIComponent(file);
+  }
+
+  // Cholg'ularning rasmlarini yangilash
+  instruments.forEach(item=>{
+    const file=photoFiles[item.id];
+    if(file){
+      item.image=commonsImage(file);
+    }
+  });
+
+  // Bosh sahifa uchun sozandalar ijrosi surati
+  const hero=document.querySelector(".hero-visual img");
+  if(hero){
+    hero.onerror=null;
+    hero.src=commonsImage(
+      "Independence Day music performance in Bukhara.jpg"
+    );
+    hero.alt="Musiqachilar va milliy cholg'u asboblari ijrosi";
+  }
+
+  // Cholg'u kartalarini yangi rasmlar bilan qayta chiqarish
+  renderInstruments();
+
+})();
+</script>
+<style>
+/* MUSIQAUSTOZ — O'QITUVCHI VA O'QUVCHI TIZIMI */
+.teacher-card{
+  border:1px solid #e3e9df;
+  border-radius:15px;
+  padding:18px;
+  margin:12px 0;
+  background:#fff;
+}
+.teacher-card strong{
+  color:#28634c;
+  font-size:18px;
+}
+.teacher-card .teacher-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.teacher-status{
+  padding:16px;
+  border-radius:12px;
+  background:#edf4ed;
+  color:#28634c;
+  margin:12px 0;
+  line-height:1.7;
+}
+.teacher-status.no-teacher{
+  background:#fff5e7;
+  color:#80551a;
+}
+#bookingForm button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+@media(max-width:600px){
+  .teacher-card{padding:14px}
+}
+</style>
+
+<script>
+/* =========================================
+   MUSIQAUSTOZ — KO'P O'QITUVCHILI TIZIM
+   ========================================= */
+
+(function(){
+
+  const $ = id => document.getElementById(id);
+
+  // Eski hodisalarni takrorlamaslik uchun formalarni yangilaymiz
+  const oldTeacherForm = $("teacherForm");
+  const teacherForm = oldTeacherForm.cloneNode(true);
+  oldTeacherForm.replaceWith(teacherForm);
+
+  const oldBookingForm = $("bookingForm");
+  const bookingForm = oldBookingForm.cloneNode(true);
+  oldBookingForm.replaceWith(bookingForm);
+
+  // O'qituvchi video havolasi majburiy
+  $("teacherVideo").required = true;
+  $("teacherVideo").parentElement.querySelector("label").textContent =
+    "Video dars havolasi (majburiy)";
+
+  // Eski o'qituvchilarga ham alohida ID beramiz
+  function allTeachers(){
+    const list = getStore("musicTeachers", []);
+    let changed = false;
+
+    list.forEach((teacher, index)=>{
+      if(!teacher.id){
+        teacher.id = "ustoz-" + Date.now() + "-" + index;
+        changed = true;
+      }
+    });
+
+    if(changed) setStore("musicTeachers", list);
+    return list;
+  }
+
+  function saveTeachers(list){
+    setStore("musicTeachers", list);
+  }
+
+  function makeId(){
+    return "ustoz-" + Date.now() + "-" +
+      Math.random().toString(36).slice(2,8);
+  }
+
+  // O'qituvchini avtomatik ravishda tanlangan cholg'uga biriktirish
+  teacherForm.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const name = $("teacherName").value.trim();
+    const instrument = $("teacherInstrument").value;
+    const phone = $("teacherPhone").value.replace(/\D/g,"");
+    const video = $("teacherVideo").value.trim();
+
+    const start = $("teacherStart").value;
+    const end = $("teacherEnd").value;
+
+    const days = [
+      ...teacherForm.querySelectorAll(
+        'input[name="teacherDays"]:checked'
+      )
+    ].map(x=>x.value);
+
+    if(!name || !instrument){
+      alert("Ism-familiya va cholg'uni kiriting.");
+      return;
+    }
+
+    if(phone.length !== 9){
+      alert("Telefon raqamiga 9 ta raqam kiriting.");
+      return;
+    }
+
+    if(!video){
+      alert("Video dars havolasini kiriting.");
+      return;
+    }
+
+    try{
+      new URL(video);
+    }catch(error){
+      alert("Video havolasi noto'g'ri. To'g'ri URL kiriting.");
+      return;
+    }
+
+    if(days.length === 0){
+      alert("Kamida bitta dars kunini belgilang.");
+      return;
+    }
+
+    if(!start || !end || end <= start){
+      alert("Dars vaqtini to'g'ri belgilang.");
+      return;
+    }
+
+    const list = allTeachers();
+
+    list.push({
+      id: makeId(),
+      name,
+      instrument,
+      phone,
+      video,
+      days,
+      start,
+      end,
+      time: days.join(", ") + " | " + start + "–" + end
+    });
+
+    saveTeachers(list);
+
+    teacherForm.reset();
+    renderTeachers();
+    updateBookingTeacher();
+
+    alert("O'qituvchi muvaffaqiyatli saqlandi va cholg'uga biriktirildi!");
+  });
+
+  // O'qituvchilar ro'yxati — har bir cholg'uga mos ustozlar
+  window.renderTeachers = function(){
+
+    const list = allTeachers();
+
+    $("teacherList").innerHTML = list.length
+      ? list.map(t=>`
+        <div class="teacher-card">
+          <strong>${escapeHTML(t.name)}</strong>
+
+          <p>
+            Cholg'u: ${instrumentName(t.instrument)}<br>
+            Telefon:
+            <a href="tel:+998${escapeAttr(t.phone)}">
+              +998 ${escapeHTML(t.phone)}
+            </a><br>
+            Kunlar:
+            ${escapeHTML((t.days || []).join(", "))}<br>
+            Dars vaqti:
+            ${escapeHTML(t.start || "")}–${escapeHTML(t.end || "")}
+          </p>
+
+          <div class="teacher-actions">
+            <a class="btn btn-light"
+               href="${escapeAttr(t.video || "#")}"
+               target="_blank"
+               rel="noopener">
+               Video darsni ko'rish
+            </a>
+
+            <button class="btn btn-primary"
+              onclick="chooseTeacher('${escapeAttr(t.id)}')">
+              Shu ustozni tanlash
+            </button>
+          </div>
+        </div>
+      `).join("")
+      : '<div class="empty">Hozircha o‘qituvchilar ro‘yxatdan o‘tmagan.</div>';
+
+    updateBookingTeacher();
+  };
+
+  // O'quvchi tanlagan cholg'u bo'yicha barcha ustozlarni chiqarish
+  window.updateBookingTeacher = function(){
+
+    const instrument = $("bookingInstrument").value;
+
+    const list = allTeachers().filter(
+      t => t.instrument === instrument
+    );
+
+    const select = $("bookingTeacher");
+
+    select.innerHTML = list.length
+      ? '<option value="">O‘qituvchini tanlang</option>' +
+        list.map(t=>`
+          <option value="${escapeAttr(t.id)}">
+            ${escapeHTML(t.name)}
+          </option>
+        `).join("")
+      : '<option value="">Hozircha o‘qituvchi yo‘q</option>';
+
+    const daySelect = $("studentDay");
+    const timeSelect = $("studentTime");
+
+    daySelect.innerHTML =
+      '<option value="">Avval o‘qituvchini tanlang</option>';
+
+    timeSelect.innerHTML =
+      '<option value="">Avval kunni tanlang</option>';
+
+    const status = $("teacherStatus");
+    const submitButton = bookingForm.querySelector('button[type="submit"]');
+
+    if(list.length){
+      status.className = "teacher-status";
+      status.innerHTML =
+        "Ushbu cholg'u bo'yicha " + list.length +
+        " nafar o'qituvchi mavjud. O'zingizga mos ustozni tanlang.";
+
+      submitButton.disabled = false;
+    }else{
+      status.className = "teacher-status no-teacher";
+      status.innerHTML = `
+        Bu cholg'u uchun hozircha o'qituvchi yo'q.
+        Lekin o'rganishni to'xtatishingiz shart emas!
+        <br><br>
+        <a class="btn btn-primary" href="#videos">
+          Mustaqil video darslarni boshlash
+        </a>
+        <a class="btn btn-light" href="#tests">
+          Bilimingizni sinash
+        </a>
+      `;
+
+      submitButton.disabled = true;
+    }
+  };
+
+  // O'quvchi o'qituvchini tanlaganda
+  window.chooseTeacher = function(id){
+
+    const teacher = allTeachers().find(t=>t.id === id);
+
+    if(!teacher) return;
+
+    $("bookingInstrument").value = teacher.instrument;
+    updateBookingTeacher();
+
+    $("bookingTeacher").value = teacher.id;
+
+    fillStudentDays(teacher);
+
+    $("teachers").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  };
+
+  // O'qituvchining dars kunlarini chiqarish
+  function fillStudentDays(teacher){
+
+    $("studentDay").innerHTML =
+      '<option value="">Dars kunini tanlang</option>' +
+      (teacher.days || []).map(day=>
+        `<option value="${escapeAttr(day)}">${escapeHTML(day)}</option>`
+      ).join("");
+
+    $("studentTime").innerHTML =
+      '<option value="">Avval kunni tanlang</option>';
+  }
+
+  // O'qituvchi tanlanganda uning kunlarini ko'rsatish
+  $("bookingTeacher").addEventListener("change", function(){
+
+    const teacher = allTeachers().find(
+      t=>t.id === this.value
+    );
+
+    if(teacher) fillStudentDays(teacher);
+  });
+
+  $("bookingInstrument").addEventListener(
+    "change",
+    updateBookingTeacher
+  );
+
+  // Tanlangan kunga mos dars vaqtlarini chiqarish
+  $("studentDay").addEventListener("change", function(){
+
+    const teacher = allTeachers().find(
+      t=>t.id === $("bookingTeacher").value
+    );
+
+    if(!teacher || !teacher.start || !teacher.end){
+      $("studentTime").innerHTML =
+        '<option value="">Vaqt mavjud emas</option>';
+      return;
+    }
+
+    const available = [];
+
+    for(let h=8; h<=20; h++){
+      for(const m of ["00","30"]){
+
+        if(h===20 && m==="30") continue;
+
+        const time =
+          String(h).padStart(2,"0") + ":" + m;
+
+        if(time >= teacher.start && time < teacher.end){
+          available.push(time);
+        }
+      }
+    }
+
+    $("studentTime").innerHTML =
+      '<option value="">Dars soatini tanlang</option>' +
+      available.map(t=>
+        `<option value="${t}">${t}</option>`
+      ).join("");
+  });
+
+  // O'quvchini tanlangan ustoz darsiga yozish
+  bookingForm.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const teacher = allTeachers().find(
+      t=>t.id === $("bookingTeacher").value
+    );
+
+    if(!teacher){
+      alert("Avval o'qituvchini tanlang.");
+      return;
+    }
+
+    const phone = $("studentPhone").value.replace(/\D/g,"");
+    const day = $("studentDay").value;
+    const time = $("studentTime").value;
+
+    if(phone.length !== 9){
+      alert("Telefon raqamiga 9 ta raqam kiriting.");
+      return;
+    }
+
+    if(!day || !time){
+      alert("Dars kuni va vaqtini tanlang.");
+      return;
+    }
+
+    const booking = {
+      instrument: teacher.instrument,
+      teacher: teacher.name,
+      teacherId: teacher.id,
+      student: $("studentName").value.trim(),
+      phone,
+      age: $("studentAge").value,
+      day,
+      time,
+      date: new Date().toLocaleString("uz-UZ")
+    };
+
+    const bookings = getStore("musicBookings", []);
+
+    bookings.unshift(booking);
+    setStore("musicBookings", bookings);
+
+    $("bookingMessage").textContent =
+      booking.student + ", siz " +
+      instrumentName(teacher.instrument) + " bo'yicha " +
+      teacher.name + " ustozning " + day +
+      " kuni, soat " + time + " dagi darsiga yozildingiz.";
+
+    $("bookingMessage").classList.add("show");
+
+    bookingForm.reset();
+
+    updateBookingTeacher();
+    renderCabinet();
+
+    alert("Darsga yozilishingiz saqlandi!");
+  });
+
+  // Darsga yozilish formasiga mustaqil o'rganish eslatmasi
+  const status = document.createElement("div");
+  status.id = "teacherStatus";
+  status.className = "teacher-status";
+  bookingForm.before(status);
+
+  // Dastlabki holat
+  renderTeachers();
+  updateBookingTeacher();
+
+})();
+</script>
+<style>
+/* 2-BOSQICH: SHAXSIY KABINETLAR */
+.cabinet-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-bottom:25px;
+}
+.cabinet-panel{
+  background:#fffefa;
+  border:1px solid #e4e8df;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 25px rgba(38,60,50,.06);
+}
+.cabinet-panel h3{
+  color:#28634c;
+  margin-top:0;
+  font-size:22px;
+}
+.cabinet-stat{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:15px 0;
+}
+.cabinet-stat div{
+  background:#edf4ed;
+  border-radius:12px;
+  padding:13px;
+  text-align:center;
+}
+.cabinet-stat strong{
+  display:block;
+  color:#28634c;
+  font-size:23px;
+}
+.cabinet-stat span{
+  font-size:11px;
+  color:#758078;
+}
+.request-card{
+  border:1px solid #e5e9e1;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+  background:white;
+}
+.request-card p{
+  font-size:13px;
+  line-height:1.7;
+  color:#68756c;
+}
+.request-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.request-actions button{
+  border:0;
+  border-radius:8px;
+  padding:9px 13px;
+  font-weight:700;
+  cursor:pointer;
+}
+.accept-request{
+  background:#e3f3e6;
+  color:#237345;
+}
+.reject-request{
+  background:#fff0ed;
+  color:#b34436;
+}
+.request-status{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+  background:#edf2ec;
+  color:#28634c;
+}
+@media(max-width:750px){
+  .cabinet-grid{grid-template-columns:1fr}
+}
+</style>
+
+<script>
+/* ======================================
+   MUSIQAUSTOZ — ALOHIDA KABINETLAR
+   ====================================== */
+(function(){
+
+  const section = document.getElementById("cabinet");
+  if(!section) return;
+
+  const head = section.querySelector(".section-head");
+  if(!head) return;
+
+  // Kabinetlar uchun yangi bo'lim
+  const dashboard = document.createElement("div");
+  dashboard.className = "cabinet-grid";
+
+  dashboard.innerHTML = `
+    <div class="cabinet-panel">
+      <h3>🎓 O‘quvchi kabineti</h3>
+      <p class="notice">
+        Bu yerda o‘quvchi o‘zlashtirish natijalari va darslarini kuzatadi.
+      </p>
+
+      <div class="cabinet-stat">
+        <div>
+          <strong id="studentTestCount">0</strong>
+          <span>Testlar</span>
+        </div>
+        <div>
+          <strong id="studentBookingCount">0</strong>
+          <span>Darslar</span>
+        </div>
+        <div>
+          <strong id="studentAverage">0%</strong>
+          <span>O‘rtacha natija</span>
+        </div>
+      </div>
+
+      <h4>Oxirgi natijalar</h4>
+      <div id="studentDashboardResults"></div>
+    </div>
+
+    <div class="cabinet-panel">
+      <h3>👨‍🏫 O‘qituvchi kabineti</h3>
+      <p class="notice">
+        O‘qituvchi o‘zini tanlaydi va unga kelgan dars so‘rovlarini ko‘radi.
+      </p>
+
+      <label for="dashboardTeacher">O‘qituvchini tanlang</label>
+      <select id="dashboardTeacher">
+        <option value="">O‘qituvchini tanlang</option>
+      </select>
+
+      <div class="cabinet-stat">
+        <div>
+          <strong id="teacherTotalRequests">0</strong>
+          <span>So‘rovlar</span>
+        </div>
+        <div>
+          <strong id="teacherAccepted">0</strong>
+          <span>Tasdiqlangan</span>
+        </div>
+        <div>
+          <strong id="teacherPending">0</strong>
+          <span>Kutilmoqda</span>
+        </div>
+      </div>
+
+      <h4>O‘quvchilar va dars so‘rovlari</h4>
+      <div id="teacherDashboardRequests">
+        <div class="empty">Avval o‘qituvchini tanlang.</div>
+      </div>
+    </div>
+  `;
+
+  head.after(dashboard);
+
+  const $ = id => document.getElementById(id);
+
+  function teachers(){
+    return getStore("musicTeachers", []);
+  }
+
+  function bookings(){
+    return getStore("musicBookings", []);
+  }
+
+  function saveBookings(list){
+    setStore("musicBookings", list);
+  }
+
+  // O'qituvchilar ro'yxatini kabinetga chiqarish
+  function fillTeacherOptions(){
+
+    const select = $("dashboardTeacher");
+    const oldValue = select.value;
+
+    select.innerHTML =
+      '<option value="">O‘qituvchini tanlang</option>' +
+      teachers().map(t=>`
+        <option value="${escapeAttr(t.id || t.name)}">
+          ${escapeHTML(t.name)} — ${escapeHTML(instrumentName(t.instrument))}
+        </option>
+      `).join("");
+
+    if([...select.options].some(o=>o.value===oldValue)){
+      select.value = oldValue;
+    }
+  }
+
+  // O'quvchi kabineti
+  function renderStudentDashboard(){
+
+    const results = getStore("musicResults", []);
+    const list = bookings();
+
+    $("studentTestCount").textContent = results.length;
+    $("studentBookingCount").textContent = list.length;
+
+    const average = results.length
+      ? Math.round(
+          results.reduce((sum,r)=>sum+(r.score/r.total*100),0)
+          / results.length
+        )
+      : 0;
+
+    $("studentAverage").textContent = average + "%";
+
+    $("studentDashboardResults").innerHTML = results.length
+      ? results.slice(0,5).map(r=>`
+          <div class="request-card">
+            <b>${escapeHTML(instrumentName(r.instrument))}</b>
+            <p>
+              Natija: ${r.score}/${r.total} ball
+              <br>${escapeHTML(r.date)}
+            </p>
+          </div>
+        `).join("")
+      : '<div class="empty">Hozircha test natijalari mavjud emas.</div>';
+  }
+
+  // O'qituvchi kabineti
+  function renderTeacherDashboard(){
+
+    const teacherId = $("dashboardTeacher").value;
+    const teacher = teachers().find(
+      t => (t.id || t.name) === teacherId
+    );
+
+    if(!teacher){
+      $("teacherTotalRequests").textContent = "0";
+      $("teacherAccepted").textContent = "0";
+      $("teacherPending").textContent = "0";
+
+      $("teacherDashboardRequests").innerHTML =
+        '<div class="empty">O‘qituvchini tanlang yoki avval o‘qituvchi ro‘yxatdan o‘tsin.</div>';
+      return;
+    }
+
+    const list = bookings().filter(b=>
+      b.teacherId
+        ? b.teacherId === teacher.id
+        : b.teacher === teacher.name
+    );
+
+    const accepted = list.filter(b=>b.status==="accepted").length;
+    const pending = list.filter(b=>!b.status || b.status==="pending").length;
+
+    $("teacherTotalRequests").textContent = list.length;
+    $("teacherAccepted").textContent = accepted;
+    $("teacherPending").textContent = pending;
+
+    $("teacherDashboardRequests").innerHTML = list.length
+      ? list.map(b=>{
+
+        const status = b.status || "pending";
+
+        const statusText =
+          status==="accepted" ? "Tasdiqlangan" :
+          status==="rejected" ? "Rad etilgan" :
+          "Kutilmoqda";
+
+        return `
+          <div class="request-card">
+            <b>${escapeHTML(b.student)}</b>
+
+            <p>
+              Cholg‘u: ${escapeHTML(instrumentName(b.instrument))}<br>
+              Telefon: +998 ${escapeHTML(b.phone)}<br>
+              Yosh: ${escapeHTML(b.age || "Ko‘rsatilmagan")}<br>
+              Dars kuni: ${escapeHTML(b.day || "Ko‘rsatilmagan")}<br>
+              Dars vaqti: ${escapeHTML(b.time || "Ko‘rsatilmagan")}<br>
+              Yozilgan vaqt: ${escapeHTML(b.date || "")}
+            </p>
+
+            <span class="request-status">${statusText}</span>
+
+            <div class="request-actions" style="margin-top:12px">
+              <button class="accept-request"
+                data-request="${escapeAttr(b.date + "|" + b.student + "|" + b.phone)}"
+                data-status="accepted">
+                Tasdiqlash
+              </button>
+
+              <button class="reject-request"
+                data-request="${escapeAttr(b.date + "|" + b.student + "|" + b.phone)}"
+                data-status="rejected">
+                Rad etish
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("")
+      : '<div class="empty">Hozircha ushbu o‘qituvchiga yozilgan o‘quvchilar yo‘q.</div>';
+  }
+
+  // O'qituvchi tanlanganda
+  $("dashboardTeacher").addEventListener("change",renderTeacherDashboard);
+
+  // So'rov holatini yangilash
+  $("teacherDashboardRequests").addEventListener("click",function(e){
+
+    const button = e.target.closest("button[data-request]");
+    if(!button) return;
+
+    const key = button.dataset.request;
+    const newStatus = button.dataset.status;
+
+    const list = bookings();
+
+    const booking = list.find(b=>
+      (b.date + "|" + b.student + "|" + b.phone) === key
+    );
+
+    if(!booking) return;
+
+    booking.status = newStatus;
+    saveBookings(list);
+
+    renderTeacherDashboard();
+    renderCabinet();
+
+    alert(
+      newStatus==="accepted"
+        ? "Dars so‘rovi tasdiqlandi."
+        : "Dars so‘rovi rad etildi."
+    );
+  });
+
+  // Umumiy yangilash
+  window.renderRoleCabinets = function(){
+    fillTeacherOptions();
+    renderStudentDashboard();
+    renderTeacherDashboard();
+  };
+
+  window.renderRoleCabinets();
+
+})();
+</script>
+
+<style>
+#mu-self-study {
+  padding: 55px 5%;
+  background: linear-gradient(135deg,#f0f7ff,#f8f5ff);
+  color: #20304a;
+  font-family: Arial,sans-serif;
+}
+#mu-self-study .study-head {
+  text-align:center;
+  margin-bottom:30px;
+}
+#mu-self-study .study-head h2 {
+  font-size:30px;
+  margin-bottom:10px;
+}
+#mu-self-study .study-head p {
+  color:#64748b;
+}
+#mu-self-study .study-controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:center;
+  margin:25px 0;
+}
+#mu-self-study select {
+  min-width:220px;
+  padding:13px;
+  border:1px solid #d8e1ef;
+  border-radius:12px;
+  background:white;
+  font-size:15px;
+}
+#mu-self-study .study-progress {
+  max-width:750px;
+  margin:20px auto;
+  background:white;
+  padding:18px;
+  border-radius:16px;
+  box-shadow:0 5px 20px #1e293b0c;
+}
+#mu-self-study .progress-track {
+  height:11px;
+  background:#e8edf5;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:12px;
+}
+#mu-self-study .progress-fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#635bff,#16b89a);
+  transition:.3s;
+}
+#mu-self-study .study-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin-top:25px;
+}
+#mu-self-study .study-card {
+  background:white;
+  border:1px solid #e5eaf2;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 6px 20px #1e293b0b;
+}
+#mu-self-study .study-card h3 {
+  margin:0 0 12px;
+  color:#343b70;
+}
+#mu-self-study .study-card p {
+  color:#64748b;
+  line-height:1.65;
+}
+#mu-self-study .study-card button,
+#mu-self-study .study-action {
+  border:0;
+  background:#635bff;
+  color:white;
+  padding:11px 17px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
+}
+#mu-self-study .study-card button:disabled {
+  background:#16a085;
+  cursor:default;
+}
+#mu-self-study .study-task {
+  background:#f5f7ff;
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+  line-height:1.6;
+}
+#mu-self-study .study-result {
+  margin-top:15px;
+  font-weight:bold;
+}
+#mu-self-study .study-quiz label {
+  display:block;
+  padding:10px;
+  margin:8px 0;
+  background:#f5f7ff;
+  border-radius:9px;
+  cursor:pointer;
+}
+#mu-self-study .study-quiz input {
+  margin-right:8px;
+}
+@media(max-width:600px) {
+  #mu-self-study {padding:35px 15px;}
+  #mu-self-study .study-head h2 {font-size:24px;}
+  #mu-self-study select {width:100%;}
+}
+</style>
+
+<section id="mu-self-study">
+  <div class="study-head">
+    <h2>🎼 Mustaqil ta’lim markazi</h2>
+    <p>Cholg‘u asbobini tanlang, darslarni o‘rganing va bilimlaringizni sinab ko‘ring.</p>
+  </div>
+
+  <div class="study-controls">
+    <select id="muInstrument">
+      <option value="dutor">Dutor</option>
+      <option value="tanbur">Tanbur</option>
+      <option value="rubob">Rubob</option>
+      <option value="gijjak">G‘ijjak</option>
+      <option value="chang">Chang</option>
+      <option value="pianino">Pianino</option>
+      <option value="skripka">Skripka</option>
+      <option value="fleyta">Fleyta</option>
+      <option value="nay">Nay</option>
+      <option value="doira">Doira</option>
+      <option value="karnay">Karnay</option>
+      <option value="surnay">Surnay</option>
+    </select>
+
+    <select id="muLevel">
+      <option value="0">Boshlang‘ich bosqich</option>
+      <option value="1">O‘rta bosqich</option>
+      <option value="2">Yuqori bosqich</option>
+    </select>
+  </div>
+
+  <div class="study-progress">
+    <strong>📊 Sizning o‘quv natijangiz</strong>
+    <p id="muProgressText">Bajarilgan darslar: 0 / 3</p>
+    <div class="progress-track">
+      <div class="progress-fill" id="muProgressBar"></div>
+    </div>
+  </div>
+
+  <div class="study-grid" id="muLessons"></div>
+
+  <div class="study-card" style="margin-top:25px;">
+    <h3>🧠 Bilimingizni sinab ko‘ring</h3>
+    <p id="muQuizQuestion"></p>
+    <div class="study-quiz" id="muQuizOptions"></div>
+    <button class="study-action" id="muCheckQuiz">Javobni tekshirish</button>
+    <div class="study-result" id="muQuizResult"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const root = document.getElementById("mu-self-study");
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = "yes";
+
+  const instrumentNames = {
+    dutor:"Dutor",tanbur:"Tanbur",rubob:"Rubob",
+    gijjak:"G‘ijjak",chang:"Chang",pianino:"Pianino",
+    skripka:"Skripka",fleyta:"Fleyta",nay:"Nay",
+    doira:"Doira",karnay:"Karnay",surnay:"Surnay"
+  };
+
+  const lessons = [
+    [
+      {
+        title:"1-dars. Cholg‘u bilan tanishish",
+        text:"Tanlangan cholg‘uning tuzilishi, asosiy qismlari va musiqadagi vazifasi bilan tanishing.",
+        task:"Cholg‘uning asosiy qismlarini aniqlang va ularning vazifasini tushuntirib bering."
+      },
+      {
+        title:"2-dars. To‘g‘ri ushlash va holat",
+        text:"Cholg‘uni to‘g‘ri ushlash, qulay o‘tirish yoki turish holati ijro sifatiga ta’sir qiladi.",
+        task:"Cholg‘uni qulay holatda ushlab, ijroga tayyorlanishni mashq qiling."
+      },
+      {
+        title:"3-dars. Dastlabki mashqlar",
+        text:"Oddiy tovushlar va ritmik mashqlar orqali cholg‘u bilan ishlashni boshlang.",
+        task:"Bir nechta tovushni navbat bilan ijro etib, ularning aniqligiga e’tibor bering."
+      }
+    ],
+    [
+      {
+        title:"1-dars. Tovush va ohang",
+        text:"Tovush balandligi, davomiyligi va ohangning o‘zgarishini o‘rganing.",
+        task:"Bir xil tovushni turli davomiylikda ijro etishga harakat qiling."
+      },
+      {
+        title:"2-dars. Ritm va usul",
+        text:"Ritm musiqaning vaqt bo‘yicha tartibini belgilaydi. Kuchli va kuchsiz hissalarni farqlashni o‘rganing.",
+        task:"Oddiy ritmik ketma-ketlikni sanab, unga mos mashq bajaring."
+      },
+      {
+        title:"3-dars. Ijro mahorati",
+        text:"Tovushlarni bir-biriga bog‘lash, ijro aniqligi va musiqiy ifodaga e’tibor bering.",
+        task:"O‘rgangan mashqingizni boshidan oxirigacha takrorlang."
+      }
+    ],
+    [
+      {
+        title:"1-dars. Murakkab ijro",
+        text:"Ijro davomida tezlik, aniqlik va tovush sifatini birgalikda boshqarishni o‘rganing.",
+        task:"O‘zingiz bilgan mashqni bir maromda ijro eting."
+      },
+      {
+        title:"2-dars. Musiqiy ifoda",
+        text:"Musiqada dinamika, urg‘u va ohang orqali asarning xarakteri ifodalanadi.",
+        task:"Bir mashqni turli kuchlanish va ifoda bilan ijro qilib ko‘ring."
+      },
+      {
+        title:"3-dars. Yakuniy mashg‘ulot",
+        text:"O‘rgangan bilimlaringizni birlashtirib, mustaqil ijro tayyorlang.",
+        task:"O‘zingiz tanlagan kichik musiqiy parchani ijro etib, natijangizni baholang."
+      }
+    ]
+  ];
+
+  const quiz = [
+    {
+      q:"Musiqada ritm nimani anglatadi?",
+      a:["Tovushlarning vaqt bo‘yicha tartibini","Cholg‘uning rangini","Musiqa asbobining og‘irligini"],
+      correct:0
+    },
+    {
+      q:"Musiqiy dinamika nimani bildiradi?",
+      a:["Cholg‘u nomini","Tovushning kuchli yoki past ijro etilishini","Musiqa asbobining narxini"],
+      correct:1
+    },
+    {
+      q:"Mashqni muntazam takrorlash nimaga yordam beradi?",
+      a:["Ijro mahoratini rivojlantirishga","Cholg‘uni almashtirishga","Musiqani to‘xtatishga"],
+      correct:0
+    }
+  ];
+
+  const storageKey = "muIndependentProgress";
+  let progress = {};
+  try {
+    progress = JSON.parse(localStorage.getItem(storageKey) || "{}");
+  } catch(e) {
+    progress = {};
+  }
+
+  let currentQuiz = 0;
+
+  const instrument = root.querySelector("#muInstrument");
+  const level = root.querySelector("#muLevel");
+  const lessonBox = root.querySelector("#muLessons");
+
+  function getKey(){
+    return instrument.value + "_" + level.value;
+  }
+
+  function getDone(){
+    return progress[getKey()] || [];
+  }
+
+  function saveProgress(){
+    localStorage.setItem(storageKey,JSON.stringify(progress));
+  }
+
+  function renderLessons(){
+    const done = getDone();
+    const currentLessons = lessons[Number(level.value)];
+
+    lessonBox.innerHTML = currentLessons.map((lesson,index)=>`
+      <div class="study-card">
+        <h3>${lesson.title}</h3>
+        <p><strong>${instrumentNames[instrument.value]}:</strong> ${lesson.text}</p>
+        <div class="study-task">
+          <strong>Amaliy topshiriq:</strong><br>
+          ${lesson.task}
+        </div>
+        <button data-lesson="${index}" ${done.includes(index)?"disabled":""}>
+          ${done.includes(index)?"✓ Bajarildi":"Darsni bajardim"}
+        </button>
+      </div>
+    `).join("");
+
+    root.querySelector("#muProgressText").textContent =
+      "Bajarilgan darslar: " + done.length + " / 3";
+
+    root.querySelector("#muProgressBar").style.width =
+      (done.length / 3 * 100) + "%";
+  }
+
+  lessonBox.addEventListener("click",function(e){
+    const button = e.target.closest("[data-lesson]");
+    if(!button) return;
+
+    const index = Number(button.dataset.lesson);
+    const done = getDone();
+
+    if(!done.includes(index)){
+      done.push(index);
+      progress[getKey()] = done;
+      saveProgress();
+      renderLessons();
+    }
+  });
+
+  function renderQuiz(){
+    const item = quiz[currentQuiz];
+    root.querySelector("#muQuizQuestion").textContent =
+      (currentQuiz+1) + ". " + item.q;
+
+    root.querySelector("#muQuizOptions").innerHTML =
+      item.a.map((answer,index)=>`
+        <label>
+          <input type="radio" name="muQuizAnswer" value="${index}">
+          ${answer}
+        </label>
+      `).join("");
+
+    root.querySelector("#muQuizResult").textContent = "";
+  }
+
+  root.querySelector("#muCheckQuiz").addEventListener("click",function(){
+    const selected = root.querySelector('input[name="muQuizAnswer"]:checked');
+    const result = root.querySelector("#muQuizResult");
+
+    if(!selected){
+      result.textContent = "Avval javobni tanlang.";
+      return;
+    }
+
+    if(Number(selected.value) === quiz[currentQuiz].correct){
+      result.textContent = "✓ To‘g‘ri javob!";
+      result.style.color = "#15966f";
+    } else {
+      result.textContent = "✗ Noto‘g‘ri. To‘g‘ri javob: " +
+        quiz[currentQuiz].a[quiz[currentQuiz].correct];
+      result.style.color = "#d34b55";
+    }
+
+    currentQuiz = (currentQuiz + 1) % quiz.length;
+    setTimeout(renderQuiz,1800);
+  });
+
+  instrument.addEventListener("change",renderLessons);
+  level.addEventListener("change",renderLessons);
+
+  renderLessons();
+  renderQuiz();
+})();
+</script>
+
+<style>
+#muas-system{padding:30px 20px;background:#f4f7fc;color:#24334d;border-radius:18px;margin:30px 0;font-family:Arial,sans-serif}
+#muas-system *{box-sizing:border-box}
+.muas-title{font-size:27px;font-weight:800;margin-bottom:8px;color:#263a5c}
+.muas-sub{color:#718096;margin-bottom:22px}
+.muas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;margin-bottom:22px}
+.muas-card{background:white;padding:20px;border-radius:14px;border:1px solid #e5eaf2;box-shadow:0 5px 18px #2538580b}
+.muas-number{font-size:28px;font-weight:800;color:#6257df;margin-top:8px}
+.muas-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.muas-btn{border:0;padding:11px 17px;border-radius:9px;background:#6257df;color:white;cursor:pointer;font-weight:600}
+.muas-btn:hover{filter:brightness(.94)}
+.muas-btn.gray{background:#e9edf5;color:#34435c}
+.muas-btn.green{background:#15976b}
+.muas-btn.red{background:#d94b5b}
+.muas-panel{background:white;border:1px solid #e5eaf2;border-radius:15px;padding:22px;margin-bottom:20px}
+.muas-panel h3{margin:0 0 17px;color:#263a5c}
+.muas-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.muas-form input,.muas-form select,.muas-form textarea,.muas-note,.muas-grade{width:100%;padding:12px;border:1px solid #dce3ef;border-radius:9px;font-size:14px;background:#fff;color:#26334a}
+.muas-form textarea{min-height:90px;resize:vertical}
+.muas-full{grid-column:1/-1}
+.muas-task{border:1px solid #e4e9f1;padding:17px;border-radius:12px;margin:12px 0;background:#fff}
+.muas-task-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.muas-tag{font-size:12px;padding:6px 10px;border-radius:20px;background:#eeeaff;color:#6257df;font-weight:700}
+.muas-status{font-size:12px;padding:6px 10px;border-radius:20px;background:#fff2d8;color:#986400;font-weight:700}
+.muas-status.done{background:#e0f7ed;color:#12805b}
+.muas-status.checked{background:#e8eaff;color:#5148b7}
+.muas-task p{color:#64748b;line-height:1.6}
+.muas-task-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.muas-empty{padding:25px;text-align:center;color:#8290a5;background:#f7f9fc;border-radius:10px}
+.muas-hidden{display:none!important}
+@media(max-width:600px){
+ #muas-system{padding:18px 12px}
+ .muas-form{grid-template-columns:1fr}
+ .muas-full{grid-column:auto}
+ .muas-title{font-size:22px}
+}
+</style>
+
+<section id="muas-system">
+ <div class="muas-title">📚 Topshiriqlar markazi</div>
+ <div class="muas-sub">O‘qituvchi topshiriqlari, o‘quvchi natijalari va baholash tizimi</div>
+
+ <div class="muas-grid">
+  <div class="muas-card">
+   <div>Jami topshiriqlar</div>
+   <div class="muas-number" id="muas-total">0</div>
+  </div>
+  <div class="muas-card">
+   <div>Bajarilgan topshiriqlar</div>
+   <div class="muas-number" id="muas-done">0</div>
+  </div>
+  <div class="muas-card">
+   <div>Tekshirilgan topshiriqlar</div>
+   <div class="muas-number" id="muas-checked">0</div>
+  </div>
+  <div class="muas-card">
+   <div>O‘rtacha baho</div>
+   <div class="muas-number" id="muas-average">—</div>
+  </div>
+ </div>
+
+ <div class="muas-tabs">
+  <button class="muas-btn" type="button" data-muas-tab="teacher">👨‍🏫 O‘qituvchi</button>
+  <button class="muas-btn gray" type="button" data-muas-tab="student">🎓 O‘quvchi</button>
+  <button class="muas-btn gray" type="button" data-muas-tab="history">📊 Natijalar tarixi</button>
+ </div>
+
+ <div id="muas-teacher" class="muas-panel">
+  <h3>➕ Yangi topshiriq yaratish</h3>
+  <form id="muas-create-form" class="muas-form">
+   <input id="muas-teacher-name" placeholder="O‘qituvchi ismi" required>
+   <select id="muas-instrument" required>
+    <option value="">Cholg‘u asbobini tanlang</option>
+   </select>
+   <input id="muas-task-title" class="muas-full" placeholder="Topshiriq nomi" required>
+   <textarea id="muas-description" class="muas-full" placeholder="Topshiriq tavsifi va bajarish shartlari..." required></textarea>
+   <input id="muas-deadline" type="date" required>
+   <input id="muas-student" placeholder="O‘quvchi ismi (ixtiyoriy)">
+   <button class="muas-btn muas-full" type="submit">Topshiriqni yaratish</button>
+  </form>
+  <div style="margin-top:25px">
+   <h3>Yaratilgan topshiriqlar</h3>
+   <div id="muas-teacher-list"></div>
+  </div>
+ </div>
+
+ <div id="muas-student" class="muas-panel muas-hidden">
+  <h3>🎓 O‘quvchi topshiriqlari</h3>
+  <input id="muas-student-filter" placeholder="Ismingizni yozing..." style="width:100%;padding:12px;border:1px solid #dce3ef;border-radius:9px;margin-bottom:12px">
+  <div id="muas-student-list"></div>
+ </div>
+
+ <div id="muas-history" class="muas-panel muas-hidden">
+  <h3>📊 Bajarilgan ishlar va baholar</h3>
+  <div id="muas-history-list"></div>
+ </div>
+</section>
+
+<script>
+(function(){
+"use strict";
+
+const root=document.getElementById("muas-system");
+if(!root || root.dataset.initialized==="yes") return;
+root.dataset.initialized="yes";
+
+const KEY="muasAssignments_v1";
+const instruments=[
+ ["dutor","Dutor"],["tanbur","Tanbur"],["rubob","Rubob"],
+ ["gijjak","G‘ijjak"],["chang","Chang"],["pianino","Pianino"],
+ ["skripka","Skripka"],["fleyta","Fleyta"],["nay","Nay"],
+ ["doira","Doira"],["karnay","Karnay"],["surnay","Surnay"]
+];
+
+const $=id=>document.getElementById(id);
+const safe=value=>String(value??"").replace(/[&<>"']/g,ch=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[ch]));
+
+function load(){
+ try{
+  const data=JSON.parse(localStorage.getItem(KEY)||"[]");
+  return Array.isArray(data)?data:[];
+ }catch(e){return []}
+}
+function save(data){
+ localStorage.setItem(KEY,JSON.stringify(data));
+}
+function instrumentLabel(id){
+ return instruments.find(x=>x[0]===id)?.[1]||id;
+}
+function makeId(){
+ return "task_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
+}
+
+$("muas-instrument").innerHTML=
+ '<option value="">Cholg‘u asbobini tanlang</option>'+
+ instruments.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join("");
+
+$("muas-deadline").min=new Date().toISOString().slice(0,10);
+
+function statusLabel(task){
+ if(task.grade!==null && task.grade!==undefined) return ["Tekshirildi","checked"];
+ if(task.submission) return ["Bajarildi — tekshiruvda","done"];
+ return ["Bajarilmagan",""];
+}
+
+function renderStats(){
+ const tasks=load();
+ const done=tasks.filter(t=>t.submission).length;
+ const checked=tasks.filter(t=>t.grade!==null && t.grade!==undefined);
+ const avg=checked.length?
+  (checked.reduce((sum,t)=>sum+Number(t.grade),0)/checked.length).toFixed(1):"—";
+
+ $("muas-total").textContent=tasks.length;
+ $("muas-done").textContent=done;
+ $("muas-checked").textContent=checked.length;
+ $("muas-average").textContent=avg;
+}
+
+function renderTeacher(){
+ const tasks=load();
+ if(!tasks.length){
+  $("muas-teacher-list").innerHTML='<div class="muas-empty">Hozircha topshiriqlar mavjud emas.</div>';
+  return;
+ }
+ $("muas-teacher-list").innerHTML=tasks.slice().reverse().map(t=>{
+  const [label,cls]=statusLabel(t);
+  return `
+  <div class="muas-task">
+   <div class="muas-task-top">
+    <strong>${safe(t.title)}</strong>
+    <span class="muas-status ${cls}">${label}</span>
+   </div>
+   <p>${safe(t.description)}</p>
+   <div>🎵 ${safe(instrumentLabel(t.instrument))} · 👨‍🏫 ${safe(t.teacher)}</div>
+   <div>📅 Muddat: ${safe(t.deadline)} · 👤 ${safe(t.student||"Barcha o‘quvchilar")}</div>
+   ${t.submission?`
+    <p><b>O‘quvchi:</b> ${safe(t.submission.name)}</p>
+    <p><b>Izoh:</b> ${safe(t.submission.note||"Izoh qoldirilmagan")}</p>
+    ${t.grade===null||t.grade===undefined?`
+     <div class="muas-task-actions">
+      <input class="muas-grade" type="number" min="1" max="100" placeholder="Baho (1–100)" id="muas-grade-${safe(t.id)}" style="max-width:150px">
+      <button class="muas-btn green" type="button" data-grade="${safe(t.id)}">Baholash</button>
+     </div>`:
+     `<p><b>O‘qituvchi bahosi:</b> ${safe(t.grade)}/100</p>`
+    }
+   `:""}
+   <div class="muas-task-actions">
+    <button class="muas-btn red" type="button" data-delete="${safe(t.id)}">O‘chirish</button>
+   </div>
+  </div>`;
+ }).join("");
+}
+
+function renderStudent(){
+ const filter=$("muas-student-filter").value.trim().toLowerCase();
+ const tasks=load().filter(t=>{
+  const assigned=!t.student || t.student.toLowerCase()===filter;
+  return assigned;
+ });
+ if(!tasks.length){
+  $("muas-student-list").innerHTML='<div class="muas-empty">Sizga mos topshiriqlar topilmadi.</div>';
+  return;
+ }
+ $("muas-student-list").innerHTML=tasks.slice().reverse().map(t=>{
+  const [label,cls]=statusLabel(t);
+  return `
+  <div class="muas-task">
+   <div class="muas-task-top">
+    <strong>${safe(t.title)}</strong>
+    <span class="muas-status ${cls}">${label}</span>
+   </div>
+   <p>${safe(t.description)}</p>
+   <div>🎵 ${safe(instrumentLabel(t.instrument))}</div>
+   <div>📅 Bajarish muddati: ${safe(t.deadline)}</div>
+   <div>👨‍🏫 O‘qituvchi: ${safe(t.teacher)}</div>
+   ${t.submission?`
+    <p><b>Siz yuborgan izoh:</b> ${safe(t.submission.note||"Izoh yo‘q")}</p>
+    ${t.grade!==null&&t.grade!==undefined?`<p><b>O‘qituvchi bahosi:</b> ${safe(t.grade)}/100</p>`:"<p>Natijangiz o‘qituvchi tomonidan tekshirilmoqda.</p>"}
+   `:`
+    <div class="muas-task-actions">
+     <input class="muas-note" id="muas-note-${safe(t.id)}" placeholder="Bajarganingiz haqida izoh yozing">
+     <button class="muas-btn green" type="button" data-submit="${safe(t.id)}">Bajarildi deb yuborish</button>
+    </div>
+   `}
+  </div>`;
+ }).join("");
+}
+
+function renderHistory(){
+ const tasks=load().filter(t=>t.submission);
+ if(!tasks.length){
+  $("muas-history-list").innerHTML='<div class="muas-empty">Hali topshiriq natijalari yo‘q.</div>';
+  return;
+ }
+ $("muas-history-list").innerHTML=tasks.slice().reverse().map(t=>`
+  <div class="muas-task">
+   <strong>${safe(t.title)}</strong>
+   <p>🎵 ${safe(instrumentLabel(t.instrument))}</p>
+   <p>👤 O‘quvchi: ${safe(t.submission.name)}</p>
+   <p>📅 Yuborilgan sana: ${safe(t.submission.date)}</p>
+   <p>📝 Izoh: ${safe(t.submission.note||"Izoh yo‘q")}</p>
+   <p><b>Natija:</b> ${t.grade!==null&&t.grade!==undefined?safe(t.grade)+"/100":"Tekshirilmagan"}</p>
+  </div>
+ `).join("");
+}
+
+function renderAll(){
+ renderStats();
+ renderTeacher();
+ renderStudent();
+ renderHistory();
+}
+
+$("muas-create-form").addEventListener("submit",function(e){
+ e.preventDefault();
+ const task={
+  id:makeId(),
+  teacher:$("muas-teacher-name").value.trim(),
+  instrument:$("muas-instrument").value,
+  title:$("muas-task-title").value.trim(),
+  description:$("muas-description").value.trim(),
+  deadline:$("muas-deadline").value,
+  student:$("muas-student").value.trim(),
+  created:new Date().toLocaleDateString("uz-UZ"),
+  submission:null,
+  grade:null
+ };
+ if(!task.teacher||!task.instrument||!task.title||!task.description||!task.deadline){
+  alert("Barcha majburiy maydonlarni to‘ldiring.");
+  return;
+ }
+ const tasks=load();
+ tasks.push(task);
+ save(tasks);
+ this.reset();
+ renderAll();
+ alert("Topshiriq muvaffaqiyatli yaratildi!");
+});
+
+$("muas-student-filter").addEventListener("input",renderStudent);
+
+root.addEventListener("click",function(e){
+ const tab=e.target.closest("[data-muas-tab]");
+ if(tab){
+  const name=tab.dataset.muasTab;
+  ["teacher","student","history"].forEach(x=>{
+   $("muas-"+x).classList.toggle("muas-hidden",x!==name);
+   root.querySelector(`[data-muas-tab="${x}"]`).classList.toggle("gray",x!==name);
+  });
+  if(name==="student") renderStudent();
+  if(name==="history") renderHistory();
+  return;
+ }
+
+ const submit=e.target.closest("[data-submit]");
+ if(submit){
+  const id=submit.dataset.submit;
+  const name=$("muas-student-filter").value.trim();
+  if(!name){
+   alert("Avval ismingizni kiriting.");
+   $("muas-student-filter").focus();
+   return;
+  }
+  const tasks=load();
+  const task=tasks.find(t=>t.id===id);
+  if(!task||task.submission) return;
+  task.submission={
+   name:name,
+   note:$("muas-note-"+id).value.trim(),
+   date:new Date().toLocaleDateString("uz-UZ")
+  };
+  save(tasks);
+  renderAll();
+  alert("Topshiriq o‘qituvchiga yuborildi!");
+  return;
+ }
+
+ const grade=e.target.closest("[data-grade]");
+ if(grade){
+  const id=grade.dataset.grade;
+  const input=$("muas-grade-"+id);
+  const value=Number(input.value);
+  if(!input.value||value<1||value>100){
+   alert("Bahoni 1 dan 100 gacha kiriting.");
+   return;
+  }
+  const tasks=load();
+  const task=tasks.find(t=>t.id===id);
+  if(!task) return;
+  task.grade=value;
+  save(tasks);
+  renderAll();
+  alert("O‘quvchi baholandi!");
+  return;
+ }
+
+ const del=e.target.closest("[data-delete]");
+ if(del){
+  if(!confirm("Bu topshiriqni o‘chirmoqchimisiz?")) return;
+  save(load().filter(t=>t.id!==del.dataset.delete));
+  renderAll();
+ }
+});
+
+renderAll();
+})();
+</script>
+
+<style>
+#mu-auth{font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef3ff,#f8fbff);padding:35px 18px;border-radius:20px;margin:30px 0;color:#24334d}
+#mu-auth *{box-sizing:border-box}
+.ma-wrap{max-width:850px;margin:auto}
+.ma-heading{text-align:center;margin-bottom:25px}
+.ma-heading h2{font-size:28px;color:#293b60;margin:0 0 9px}
+.ma-heading p{color:#78869b}
+.ma-box{background:white;padding:25px;border-radius:17px;box-shadow:0 8px 30px #263b6010;border:1px solid #e7edf7}
+.ma-switch{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.ma-btn{border:0;border-radius:9px;padding:12px 18px;background:#635bdf;color:white;font-weight:700;cursor:pointer}
+.ma-btn.secondary{background:#edf0f8;color:#394761}
+.ma-btn.danger{background:#dc5364}
+.ma-btn:disabled{opacity:.6;cursor:not-allowed}
+.ma-form{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.ma-form input,.ma-form select{width:100%;padding:13px;border:1px solid #dce3ef;border-radius:9px;font-size:14px;background:white}
+.ma-full{grid-column:1/-1}
+.ma-note{font-size:13px;color:#7b8799;line-height:1.6;margin-top:14px}
+.ma-message{padding:12px;border-radius:9px;margin:12px 0;display:none}
+.ma-message.error{display:block;background:#fff0f0;color:#b52f3c}
+.ma-message.success{display:block;background:#e9f9f1;color:#14734e}
+.ma-profile{display:flex;gap:15px;align-items:center;margin-bottom:22px}
+.ma-avatar{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:#eeeaff;color:#635bdf;font-size:25px;font-weight:bold}
+.ma-info h3{margin:0 0 6px}
+.ma-info p{margin:0;color:#78869b}
+.ma-details{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ma-detail{background:#f6f8fc;padding:15px;border-radius:10px}
+.ma-detail small{display:block;color:#7d899b;margin-bottom:6px}
+.ma-hidden{display:none!important}
+@media(max-width:550px){.ma-form,.ma-details{grid-template-columns:1fr}.ma-full{grid-column:auto}#mu-auth{padding:20px 12px}}
+</style>
+
+<section id="mu-auth">
+ <div class="ma-wrap">
+  <div class="ma-heading">
+   <h2>🎼 MusiqaUstoz shaxsiy kabineti</h2>
+   <p>O‘quvchi va o‘qituvchilar uchun yagona kirish tizimi</p>
+  </div>
+
+  <div class="ma-box">
+   <div id="ma-auth-area">
+    <div class="ma-switch">
+     <button type="button" class="ma-btn" id="ma-show-login">Tizimga kirish</button>
+     <button type="button" class="ma-btn secondary" id="ma-show-register">Ro‘yxatdan o‘tish</button>
+    </div>
+
+    <form id="ma-login" class="ma-form">
+     <input class="ma-full" id="ma-login-name" placeholder="Telefon yoki foydalanuvchi nomi" required>
+     <input class="ma-full" id="ma-login-password" type="password" placeholder="Parol" required>
+     <button class="ma-btn ma-full" type="submit">Kirish</button>
+    </form>
+
+    <form id="ma-register" class="ma-form ma-hidden">
+     <input id="ma-reg-name" placeholder="Ism va familiya" required>
+     <input id="ma-reg-username" placeholder="Foydalanuvchi nomi" required>
+     <input id="ma-reg-phone" type="tel" placeholder="Telefon raqami" required>
+     <select id="ma-reg-role" required>
+      <option value="">Foydalanuvchi turini tanlang</option>
+      <option value="student">O‘quvchi</option>
+      <option value="teacher">O‘qituvchi</option>
+     </select>
+     <select id="ma-reg-instrument" class="ma-full">
+      <option value="">Cholg‘u asbobini tanlang (o‘qituvchi uchun)</option>
+      <option>Dutor</option><option>Tanbur</option><option>Rubob</option>
+      <option>G‘ijjak</option><option>Chang</option><option>Pianino</option>
+      <option>Skripka</option><option>Fleyta</option><option>Nay</option>
+      <option>Doira</option><option>Karnay</option><option>Surnay</option>
+     </select>
+     <input id="ma-reg-password" type="password" placeholder="Parol (kamida 6 belgi)" required>
+     <input id="ma-reg-confirm" type="password" placeholder="Parolni takrorlang" required>
+     <button class="ma-btn ma-full" type="submit">Hisob yaratish</button>
+    </form>
+
+    <div id="ma-message" class="ma-message"></div>
+    <p class="ma-note">Eslatma: bu sinov versiyasi. Haqiqiy shaxsiy ma’lumot yoki boshqa saytlarda ishlatiladigan parolni kiritmang. Hisoblar hozircha faqat shu brauzerda saqlanadi.</p>
+   </div>
+
+   <div id="ma-dashboard" class="ma-hidden">
+    <div class="ma-profile">
+     <div class="ma-avatar" id="ma-avatar">M</div>
+     <div class="ma-info">
+      <h3 id="ma-welcome">Xush kelibsiz!</h3>
+      <p id="ma-role-label"></p>
+     </div>
+    </div>
+    <div class="ma-details">
+     <div class="ma-detail"><small>Foydalanuvchi nomi</small><strong id="ma-user-display"></strong></div>
+     <div class="ma-detail"><small>Telefon</small><strong id="ma-phone-display"></strong></div>
+     <div class="ma-detail"><small>Yo‘nalish</small><strong id="ma-instrument-display"></strong></div>
+     <div class="ma-detail"><small>Hisob yaratilgan sana</small><strong id="ma-date-display"></strong></div>
+    </div>
+    <div style="margin-top:22px;padding:17px;background:#f4f6ff;border-radius:12px">
+     <strong id="ma-dashboard-title">Shaxsiy kabinetingiz</strong>
+     <p id="ma-dashboard-text" style="color:#718096;line-height:1.6"></p>
+    </div>
+    <button type="button" class="ma-btn danger" id="ma-logout" style="margin-top:20px">Tizimdan chiqish</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<script>
+(function(){
+"use strict";
+
+const box=document.getElementById("mu-auth");
+if(!box || box.dataset.ready==="yes") return;
+box.dataset.ready="yes";
+
+const USERS="muAccounts_v1";
+const SESSION="muSession_v1";
+const $=id=>document.getElementById(id);
+
+function getUsers(){
+ try{
+  const value=JSON.parse(localStorage.getItem(USERS)||"[]");
+  return Array.isArray(value)?value:[];
+ }catch(e){return []}
+}
+function message(text,type){
+ const el=$("ma-message");
+ el.textContent=text;
+ el.className="ma-message "+type;
+}
+function showForm(which){
+ $("ma-login").classList.toggle("ma-hidden",which!=="login");
+ $("ma-register").classList.toggle("ma-hidden",which!=="register");
+ $("ma-show-login").classList.toggle("secondary",which!=="login");
+ $("ma-show-register").classList.toggle("secondary",which!=="register");
+ $("ma-message").className="ma-message";
+}
+function hashPassword(password){
+ if(!window.crypto || !crypto.subtle){
+  throw new Error("Xavfsiz parol xeshlash mavjud emas. Loyihani localhost orqali oching.");
+ }
+ return crypto.subtle.digest(
+  "SHA-256",new TextEncoder().encode(password)
+ ).then(buffer=>Array.from(new Uint8Array(buffer))
+  .map(b=>b.toString(16).padStart(2,"0")).join(""));
+}
+function showDashboard(user){
+ $("ma-auth-area").classList.add("ma-hidden");
+ $("ma-dashboard").classList.remove("ma-hidden");
+ $("ma-avatar").textContent=user.name.charAt(0).toUpperCase();
+ $("ma-welcome").textContent="Xush kelibsiz, "+user.name+"!";
+ $("ma-role-label").textContent=user.role==="teacher"?"👨‍🏫 O‘qituvchi":"🎓 O‘quvchi";
+ $("ma-user-display").textContent=user.username;
+ $("ma-phone-display").textContent=user.phone;
+ $("ma-instrument-display").textContent=user.instrument||"Tanlanmagan";
+ $("ma-date-display").textContent=user.date;
+ $("ma-dashboard-title").textContent=user.role==="teacher"?
+  "O‘qituvchi kabineti":"O‘quvchi kabineti";
+ $("ma-dashboard-text").textContent=user.role==="teacher"?
+  "Bu yerda o‘qituvchi sifatida ro‘yxatdan o‘tdingiz. Keyingi bosqichda darslar, o‘quvchilar va topshiriqlar shu kabinet bilan bog‘lanadi.":
+  "Bu yerda o‘quvchi sifatida ro‘yxatdan o‘tdingiz. Keyingi bosqichda dars jadvali, topshiriqlar va natijalaringiz shu kabinet bilan bog‘lanadi.";
+}
+function showAuth(){
+ $("ma-auth-area").classList.remove("ma-hidden");
+ $("ma-dashboard").classList.add("ma-hidden");
+ showForm("login");
+}
+
+$("ma-show-login").addEventListener("click",()=>showForm("login"));
+$("ma-show-register").addEventListener("click",()=>showForm("register"));
+
+$("ma-register").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const name=$("ma-reg-name").value.trim();
+ const username=$("ma-reg-username").value.trim().toLowerCase();
+ const phone=$("ma-reg-phone").value.trim();
+ const role=$("ma-reg-role").value;
+ const instrument=$("ma-reg-instrument").value;
+ const password=$("ma-reg-password").value;
+ const confirmPassword=$("ma-reg-confirm").value;
+
+ if(password.length<6){
+  message("Parol kamida 6 ta belgidan iborat bo‘lishi kerak.","error");return;
+ }
+ if(password!==confirmPassword){
+  message("Parollar bir xil emas.","error");return;
+ }
+ if(role==="teacher"&&!instrument){
+  message("O‘qituvchi uchun cholg‘u asbobini tanlang.","error");return;
+ }
+ const users=getUsers();
+ if(users.some(u=>u.username===username)){
+  message("Bu foydalanuvchi nomi band. Boshqasini tanlang.","error");return;
+ }
+ try{
+  const passwordHash=await hashPassword(password);
+  const user={
+   id:"mu_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),
+   name,username,phone,role,instrument,
+   passwordHash,
+   date:new Date().toLocaleDateString("uz-UZ")
+  };
+  users.push(user);
+  localStorage.setItem(USERS,JSON.stringify(users));
+  localStorage.setItem(SESSION,user.id);
+  showDashboard(user);
+ }catch(err){
+  message(err.message||"Hisob yaratishda xatolik yuz berdi.","error");
+ }
+});
+
+$("ma-login").addEventListener("submit",async function(e){
+ e.preventDefault();
+ const username=$("ma-login-name").value.trim().toLowerCase();
+ const password=$("ma-login-password").value;
+ try{
+  const passwordHash=await hashPassword(password);
+  const user=getUsers().find(u=>
+   (u.username===username||u.phone===username)&&
+   u.passwordHash===passwordHash
+  );
+  if(!user){
+   message("Foydalanuvchi nomi yoki parol noto‘g‘ri.","error");return;
+  }
+  localStorage.setItem(SESSION,user.id);
+  showDashboard(user);
+ }catch(err){
+  message(err.message||"Kirishda xatolik yuz berdi.","error");
+ }
+});
+
+$("ma-logout").addEventListener("click",function(){
+ localStorage.removeItem(SESSION);
+ showAuth();
+});
+
+const session=localStorage.getItem(SESSION);
+if(session){
+ const user=getUsers().find(u=>u.id===session);
+ if(user) showDashboard(user);
+ else showAuth();
+}else{
+ showAuth();
+}
+})();
+</script>
+
+<style>
+#ma-reg-extra{grid-column:1/-1}
+#ma-reg-extra .ma-extra-fields{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
+#ma-reg-extra input,#ma-reg-extra select{
+ width:100%;
+ padding:13px;
+ border:1px solid #dce3ef;
+ border-radius:9px;
+ font-size:14px;
+ background:white;
+}
+#ma-reg-extra .ma-full{grid-column:1/-1}
+@media(max-width:550px){
+ #ma-reg-extra .ma-extra-fields{grid-template-columns:1fr}
+ #ma-reg-extra .ma-full{grid-column:auto}
+}
+</style>
+
+<script>
+(function(){
+"use strict";
+
+const role=document.getElementById("ma-reg-role");
+const form=document.getElementById("ma-register");
+const instrument=document.getElementById("ma-reg-instrument");
+const phone=document.getElementById("ma-reg-phone");
+
+if(!role||!form||!instrument||!phone)return;
+if(form.dataset.roleUpdated==="yes")return;
+form.dataset.roleUpdated="yes";
+
+// Telefon raqami uchun O‘zbekiston formati
+phone.type="tel";
+phone.placeholder="+998 90 123 45 67";
+phone.inputMode="tel";
+phone.maxLength=13;
+phone.pattern="\\+998[0-9]{9}";
+
+phone.addEventListener("input",function(){
+ let digits=this.value.replace(/\D/g,"");
+ if(digits.startsWith("998"))digits=digits.slice(3);
+ digits=digits.slice(0,9);
+ this.value=digits?"+998"+digits:"+998";
+});
+
+// Eski umumiy maydonlarni joylashtirish
+const extra=document.createElement("div");
+extra.id="ma-reg-extra";
+instrument.insertAdjacentElement("afterend",extra);
+
+function updateRole(){
+ const selected=role.value;
+
+ instrument.classList.add("ma-hidden");
+ extra.innerHTML="";
+
+ if(selected==="teacher"){
+  instrument.classList.remove("ma-hidden");
+  instrument.required=true;
+  extra.innerHTML=`
+   <div class="ma-extra-fields">
+    <input class="ma-full" id="ma-teacher-experience"
+     placeholder="Ish tajribasi (masalan, 3 yil)">
+    <input class="ma-full" id="ma-teacher-education"
+     placeholder="Ma’lumoti (masalan, oliy)">
+    <input class="ma-full" id="ma-teacher-time"
+     placeholder="Dars vaqti (masalan, 09:00–18:00)">
+    <input class="ma-full" id="ma-teacher-video"
+     type="url" placeholder="Video dars havolasi (ixtiyoriy)">
+   </div>
+  `;
+ }else if(selected==="student"){
+  instrument.required=false;
+  extra.innerHTML=`
+   <div class="ma-extra-fields">
+    <input id="ma-student-age" type="number" min="5" max="100"
+     placeholder="Yoshingiz">
+    <select id="ma-student-level">
+     <option value="">Bilim darajangiz</option>
+     <option value="Boshlang‘ich">Boshlang‘ich</option>
+     <option value="O‘rta">O‘rta</option>
+     <option value="Yuqori">Yuqori</option>
+    </select>
+    <select id="ma-student-instrument" class="ma-full">
+     <option value="">O‘rganmoqchi bo‘lgan cholg‘u</option>
+     <option>Dutor</option><option>Tanbur</option>
+     <option>Rubob</option><option>G‘ijjak</option>
+     <option>Chang</option><option>Pianino</option>
+     <option>Skripka</option><option>Fleyta</option>
+     <option>Nay</option><option>Doira</option>
+     <option>Karnay</option><option>Surnay</option>
+    </select>
+   </div>
+  `;
+ }
+}
+
+role.addEventListener("change",updateRole);
+
+// Eski forma yuborilishidan oldin qo‘shimcha ma’lumotlarni saqlash
+form.addEventListener("submit",function(){
+ const selected=role.value;
+ const extraData={};
+
+ if(selected==="teacher"){
+  extraData.experience=document.getElementById("ma-teacher-experience")?.value||"";
+  extraData.education=document.getElementById("ma-teacher-education")?.value||"";
+  extraData.time=document.getElementById("ma-teacher-time")?.value||"";
+  extraData.video=document.getElementById("ma-teacher-video")?.value||"";
+ }else if(selected==="student"){
+  extraData.age=document.getElementById("ma-student-age")?.value||"";
+  extraData.level=document.getElementById("ma-student-level")?.value||"";
+  extraData.instrument=document.getElementById("ma-student-instrument")?.value||"";
+ }
+
+ // Ro‘yxatdan o‘tish kodi o‘qishi uchun vaqtinchalik maydonlar
+ form.dataset.extra=JSON.stringify(extraData);
+},true);
+
+// Eski ro‘yxatdan o‘tish kodidagi user obyektiga qo‘shimcha ma’lumot qo‘shish
+const originalSubmit=HTMLFormElement.prototype.submit;
+
+updateRole();
+
+})();
+</script>
+
+<style>
+#mu-ranking{margin:30px 0;padding:30px 20px;background:#f3f6fc;border-radius:20px;color:#24334d;font-family:Arial,sans-serif}
+#mu-ranking *{box-sizing:border-box}
+.mur-wrap{max-width:1100px;margin:auto}
+.mur-heading h2{font-size:27px;margin:0 0 8px;color:#283b60}
+.mur-heading p{color:#77869c;margin:0 0 22px}
+.mur-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.mur-stat{background:white;padding:20px;border-radius:14px;border:1px solid #e5eaf2}
+.mur-stat strong{display:block;font-size:28px;color:#6258d9;margin-top:9px}
+.mur-panel{background:white;padding:22px;border-radius:15px;border:1px solid #e5eaf2;margin-bottom:18px}
+.mur-search{width:100%;padding:13px;border:1px solid #dce3ef;border-radius:9px;margin-bottom:16px;font-size:14px}
+.mur-table{width:100%;border-collapse:collapse}
+.mur-table th,.mur-table td{text-align:left;padding:13px 10px;border-bottom:1px solid #edf0f5;font-size:14px}
+.mur-table th{color:#77869c;background:#f8f9fc}
+.mur-rank{font-weight:800;color:#6258d9}
+.mur-medal{font-size:22px}
+.mur-level{display:inline-block;padding:6px 10px;border-radius:20px;background:#eeeaff;color:#6258d9;font-size:12px;font-weight:bold}
+.mur-btn{border:0;border-radius:9px;padding:11px 15px;background:#6258d9;color:white;font-weight:700;cursor:pointer}
+.mur-btn:hover{filter:brightness(.94)}
+.mur-btn:disabled{opacity:.5;cursor:not-allowed}
+.mur-empty{text-align:center;padding:25px;color:#8290a5;background:#f7f9fc;border-radius:10px}
+.mur-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.mur-achievement{padding:18px;border:1px solid #e5eaf2;border-radius:13px;background:#fff}
+.mur-achievement .emoji{font-size:30px}
+.mur-achievement h4{margin:10px 0 6px}
+.mur-achievement p{color:#77869c;font-size:13px;line-height:1.5}
+@media(max-width:600px){
+ #mu-ranking{padding:20px 10px}
+ .mur-panel{padding:13px;overflow-x:auto}
+ .mur-table{min-width:550px}
+}
+</style>
+
+<section id="mu-ranking">
+ <div class="mur-wrap">
+  <div class="mur-heading">
+   <h2>🏆 O‘quvchilar reytingi</h2>
+   <p>Faollik, topshiriqlar va o‘qituvchi baholari asosidagi natijalar</p>
+  </div>
+
+  <div class="mur-stats">
+   <div class="mur-stat">Jami o‘quvchilar<strong id="mur-students">0</strong></div>
+   <div class="mur-stat">Bajarilgan topshiriqlar<strong id="mur-tasks">0</strong></div>
+   <div class="mur-stat">Tekshirilgan ishlar<strong id="mur-checked">0</strong></div>
+   <div class="mur-stat">Eng yuqori o‘rtacha baho<strong id="mur-best">—</strong></div>
+  </div>
+
+  <div class="mur-panel">
+   <h3>🥇 Umumiy reyting</h3>
+   <input id="mur-search" class="mur-search" placeholder="O‘quvchi ismini qidirish...">
+   <div id="mur-ranking-list"></div>
+  </div>
+
+  <div class="mur-panel">
+   <h3>🎖️ Yutuqlar va darajalar</h3>
+   <div id="mur-achievements" class="mur-cards"></div>
+  </div>
+ </div>
+</section>
+
+<script>
+(function(){
+"use strict";
+
+const root=document.getElementById("mu-ranking");
+if(!root || root.dataset.ready==="yes")return;
+root.dataset.ready="yes";
+
+const KEY="muasAssignments_v1";
+const $=id=>document.getElementById(id);
+let students=[];
+
+function readTasks(){
+ try{
+  const data=JSON.parse(localStorage.getItem(KEY)||"[]");
+  return Array.isArray(data)?data:[];
+ }catch(e){return []}
+}
+
+function calculate(){
+ const tasks=readTasks();
+ const map={};
+
+ tasks.forEach(task=>{
+  if(!task.submission || !task.submission.name)return;
+
+  const name=String(task.submission.name).trim();
+  if(!name)return;
+
+  const key=name.toLowerCase();
+
+  if(!map[key]){
+   map[key]={
+    name:name,
+    completed:0,
+    checked:0,
+    totalGrade:0,
+    instruments:{}
+   };
+  }
+
+  const student=map[key];
+  student.completed++;
+
+  if(task.instrument){
+   student.instruments[task.instrument]=true;
+  }
+
+  if(task.grade!==null && task.grade!==undefined &&
+     Number.isFinite(Number(task.grade))){
+   student.checked++;
+   student.totalGrade+=Number(task.grade);
+  }
+ });
+
+ students=Object.values(map).map(student=>{
+  const average=student.checked?
+   student.totalGrade/student.checked:0;
+
+  // Reyting ballari: har bir topshiriq uchun 10 ball,
+  // tekshirilgan ishlar uchun esa bahoning 0.5 qismi.
+  const points=Math.round(
+   student.completed*10+student.totalGrade*0.5
+  );
+
+  return {
+   ...student,
+   average,
+   points,
+   instrumentCount:Object.keys(student.instruments).length
+  };
+ });
+
+ students.sort((a,b)=>
+  b.points-a.points || b.average-a.average ||
+  b.completed-a.completed
+ );
+}
+
+function level(student){
+ if(student.average>=90 && student.checked>=3)
+  return {name:"Oltin daraja",icon:"🥇"};
+ if(student.average>=75 && student.checked>=2)
+  return {name:"Kumush daraja",icon:"🥈"};
+ if(student.average>=60 && student.checked>=1)
+  return {name:"Bronza daraja",icon:"🥉"};
+ return {name:"O‘rganmoqda",icon:"🎵"};
+}
+
+function render(){
+ calculate();
+
+ const totalTasks=students.reduce((s,x)=>s+x.completed,0);
+ const totalChecked=students.reduce((s,x)=>s+x.checked,0);
+ const best=students.filter(x=>x.checked>0);
+
+ $("mur-students").textContent=students.length;
+ $("mur-tasks").textContent=totalTasks;
+ $("mur-checked").textContent=totalChecked;
+ $("mur-best").textContent=best.length?
+  Math.max(...best.map(x=>x.average)).toFixed(1):"—";
+
+ renderList();
+ renderAchievements();
+}
+
+function renderList(){
+ const query=$("mur-search").value.trim().toLowerCase();
+ const filtered=students.filter(x=>x.name.toLowerCase().includes(query));
+
+ if(!filtered.length){
+  $("mur-ranking-list").innerHTML=
+   '<div class="mur-empty">Hozircha reyting uchun natijalar yo‘q. O‘quvchilar topshiriq bajarib, o‘qituvchidan baho olgach, bu yerda ko‘rinadi.</div>';
+  return;
+ }
+
+ $("mur-ranking-list").innerHTML=`
+ <table class="mur-table">
+  <thead><tr>
+   <th>O‘rin</th><th>O‘quvchi</th><th>Topshiriqlar</th>
+   <th>O‘rtacha baho</th><th>Ball</th><th>Daraja</th><th>Sertifikat</th>
+  </tr></thead>
+  <tbody>
+  ${filtered.map(student=>{
+   const index=students.indexOf(student);
+   const medal=index===0?"🥇":index===1?"🥈":index===2?"🥉": "🎵";
+   const lv=level(student);
+   return `<tr>
+    <td class="mur-rank">${medal} ${index+1}</td>
+    <td><b>${escapeText(student.name)}</b></td>
+    <td>${student.completed}</td>
+    <td>${student.checked?student.average.toFixed(1):"—"}</td>
+    <td><b>${student.points}</b></td>
+    <td><span class="mur-level">${lv.icon} ${lv.name}</span></td>
+    <td><button class="mur-btn" data-certificate="${index}"
+      ${student.checked<1?"disabled":""}>Chiqarish</button></td>
+   </tr>`;
+  }).join("")}
+  </tbody>
+ </table>`;
+}
+
+function escapeText(value){
+ return String(value).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function renderAchievements(){
+ const cards=[
+  {icon:"🎯",title:"Birinchi qadam",desc:"Birinchi topshiriqni bajargan o‘quvchi.",test:s=>s.completed>=1},
+  {icon:"📚",title:"Mehnatkash o‘quvchi",desc:"Kamida 5 ta topshiriqni bajargan o‘quvchi.",test:s=>s.completed>=5},
+  {icon:"⭐",title:"A’lochi",desc:"Kamida 3 ta tekshirilgan ish va 90+ o‘rtacha baho.",test:s=>s.checked>=3&&s.average>=90},
+  {icon:"🎼",title:"Cholg‘u ixlosmandi",desc:"Kamida 3 xil cholg‘u yo‘nalishida topshiriq bajargan.",test:s=>s.instrumentCount>=3}
+ ];
+
+ $("mur-achievements").innerHTML=cards.map(card=>{
+  const winners=students.filter(card.test);
+  return `<div class="mur-achievement">
+   <div class="emoji">${card.icon}</div>
+   <h4>${card.title}</h4>
+   <p>${card.desc}</p>
+   <b>${winners.length} nafar o‘quvchi</b>
+  </div>`;
+ }).join("");
+}
+
+function certificate(student){
+ const lv=level(student);
+ const win=window.open("","_blank","width=900,height=650");
+ if(!win){
+  alert("Sertifikat oynasi ochilmadi. Brauzerda qalqib chiquvchi oynalarga ruxsat bering.");
+  return;
+ }
+
+ win.document.write(`<!DOCTYPE html>
+ <html lang="uz"><head><meta charset="UTF-8">
+ <title>MusiqaUstoz sertifikati</title>
+ <style>
+ body{font-family:Georgia,serif;background:#f1f3f8;padding:30px}
+ .certificate{max-width:800px;margin:auto;background:white;border:12px double #b79a4b;padding:55px 35px;text-align:center;color:#263654}
+ h1{font-size:42px;color:#a17b25;margin:10px}
+ h2{font-size:28px;margin:30px 0 10px}
+ .name{font-size:34px;color:#6358bd;font-weight:bold;margin:25px}
+ .info{font-size:18px;line-height:1.8}
+ .seal{margin:25px auto;border:2px solid #b79a4b;border-radius:50%;width:95px;height:95px;display:grid;place-items:center;font-size:30px}
+ button{padding:12px 22px;background:#6358bd;color:white;border:0;border-radius:8px;cursor:pointer}
+ @media print{body{background:white;padding:0}button{display:none}.certificate{border:12px double #b79a4b}}
+ </style></head><body>
+ <div class="certificate">
+  <div style="letter-spacing:5px;color:#a17b25">MUSIQAUSTOZ TA’LIM PLATFORMASI</div>
+  <h1>SERTIFIKAT</h1>
+  <h2>Ushbu sertifikat topshiriladi</h2>
+  <div class="name">${escapeText(student.name)}</div>
+  <div class="info">
+   Musiqa ta’limidagi faolligi va topshiriqlarni bajargani uchun.<br>
+   Bajarilgan topshiriqlar: <b>${student.completed}</b><br>
+   O‘rtacha baho: <b>${student.average.toFixed(1)}</b><br>
+   Daraja: <b>${lv.name}</b>
+  </div>
+  <div class="seal">🎼</div>
+  <p>${new Date().toLocaleDateString("uz-UZ")}</p>
+  <button onclick="window.print()">Sertifikatni chop etish</button>
+ </div></body></html>`);
+ win.document.close();
+}
+
+$("mur-search").addEventListener("input",renderList);
+
+root.addEventListener("click",function(e){
+ const button=e.target.closest("[data-certificate]");
+ if(!button)return;
+ const student=students[Number(button.dataset.certificate)];
+ if(student)certificate(student);
+});
+
+window.addEventListener("storage",function(e){
+ if(e.key===KEY)render();
+});
+
+render();
+})();
+</script>
+
+<style>
+/* MUSIQAUSTOZ — YAKUNIY ZAXIRA MARKAZI */
+#mu-final-center {
+  margin: 35px 0;
+  padding: 28px;
+  border-radius: 22px;
+  background: linear-gradient(135deg,#ffffff,#eef4ff);
+  border: 1px solid #dce6f5;
+  box-shadow: 0 12px 35px rgba(40,70,120,.08);
+  color: #1d2b45;
+}
+#mu-final-center * {box-sizing:border-box}
+#mu-final-center h2 {margin:0 0 10px;font-size:25px}
+#mu-final-center p {color:#68758b;line-height:1.6}
+.mu-final-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:15px;
+  margin:22px 0;
+}
+.mu-final-card {
+  padding:20px;
+  background:white;
+  border:1px solid #e5ebf4;
+  border-radius:16px;
+}
+.mu-final-card span {
+  display:block;
+  color:#758198;
+  font-size:13px;
+}
+.mu-final-card strong {
+  display:block;
+  margin-top:9px;
+  font-size:25px;
+  color:#5148d9;
+}
+.mu-final-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+}
+.mu-final-actions button {
+  border:0;
+  padding:13px 20px;
+  border-radius:11px;
+  background:#5b55df;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+.mu-final-actions button:hover {background:#4039bd}
+.mu-final-actions .restore {background:#168b69}
+.mu-final-actions .restore:hover {background:#087252}
+#mu-final-status {
+  margin-top:16px;
+  padding:12px;
+  border-radius:10px;
+  background:#edf4ff;
+  color:#354a70;
+  display:none;
+}
+@media(max-width:600px) {
+  #mu-final-center {padding:18px}
+  .mu-final-actions button {width:100%}
+}
+</style>
+
+<section id="mu-final-center">
+  <h2>🛡️ MusiqaUstoz — Ma’lumotlar markazi</h2>
+  <p>
+    Platformadagi ma’lumotlarni zaxiralang va zarur bo‘lganda
+    oldingi zaxira faylidan qayta tiklang.
+  </p>
+
+  <div class="mu-final-grid">
+    <div class="mu-final-card">
+      <span>Jami saqlangan ma’lumotlar</span>
+      <strong id="mu-final-total">0</strong>
+    </div>
+    <div class="mu-final-card">
+      <span>O‘qituvchilar</span>
+      <strong id="mu-final-teachers">0</strong>
+    </div>
+    <div class="mu-final-card">
+      <span>Topshiriqlar</span>
+      <strong id="mu-final-tasks">0</strong>
+    </div>
+    <div class="mu-final-card">
+      <span>Ro‘yxatdan o‘tgan hisoblar</span>
+      <strong id="mu-final-users">0</strong>
+    </div>
+  </div>
+
+  <div class="mu-final-actions">
+    <button type="button" id="mu-final-backup">
+      ⬇ Ma’lumotlarni zaxiralash
+    </button>
+
+    <button type="button" class="restore" id="mu-final-restore">
+      ⬆ Zaxira faylini tiklash
+    </button>
+
+    <input type="file" id="mu-final-file"
+      accept=".json,application/json" hidden>
+  </div>
+
+  <div id="mu-final-status"></div>
+</section>
+
+<script>
+(function () {
+  const prefix = ["mu", "music"];
+
+  function getProjectKeys() {
+    return Object.keys(localStorage).filter(key =>
+      prefix.some(p => key.startsWith(p))
+    );
+  }
+
+  function readData() {
+    const data = {};
+    getProjectKeys().forEach(key => {
+      data[key] = localStorage.getItem(key);
+    });
+    return data;
+  }
+
+  function showStatus(message) {
+    const box = document.getElementById("mu-final-status");
+    box.textContent = message;
+    box.style.display = "block";
+  }
+
+  function updateStats() {
+    const data = readData();
+    const keys = Object.keys(data);
+
+    function count(key) {
+      try {
+        const value = JSON.parse(data[key] || "[]");
+        return Array.isArray(value) ? value.length :
+          (value && typeof value === "object"
+            ? Object.keys(value).length : 0);
+      } catch {
+        return 0;
+      }
+    }
+
+    document.getElementById("mu-final-total").textContent =
+      keys.length;
+
+    document.getElementById("mu-final-teachers").textContent =
+      count("musicTeachers");
+
+    document.getElementById("mu-final-tasks").textContent =
+      count("muasAssignments_v1");
+
+    document.getElementById("mu-final-users").textContent =
+      count("muAccounts_v1");
+  }
+
+  document.getElementById("mu-final-backup")
+    .addEventListener("click", function () {
+      const backup = {
+        application: "MusiqaUstoz",
+        version: 1,
+        createdAt: new Date().toISOString(),
+        data: readData()
+      };
+
+      const blob = new Blob(
+        [JSON.stringify(backup, null, 2)],
+        {type: "application/json"}
+      );
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "MusiqaUstoz-zaxira.json";
+      link.click();
+
+      URL.revokeObjectURL(url);
+      showStatus("Zaxira fayli tayyorlandi.");
+    });
+
+  const fileInput = document.getElementById("mu-final-file");
+
+  document.getElementById("mu-final-restore")
+    .addEventListener("click", function () {
+      fileInput.click();
+    });
+
+  fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      try {
+        const backup = JSON.parse(reader.result);
+
+        if (
+          backup.application !== "MusiqaUstoz" ||
+          !backup.data ||
+          typeof backup.data !== "object" ||
+          Array.isArray(backup.data)
+        ) {
+          throw new Error("Noto‘g‘ri zaxira fayli");
+        }
+
+        const entries = Object.entries(backup.data);
+
+        if (!entries.every(([key, value]) =>
+          typeof key === "string" &&
+          prefix.some(p => key.startsWith(p)) &&
+          typeof value === "string"
+        )) {
+          throw new Error("Fayl tarkibi noto‘g‘ri");
+        }
+
+        if (!confirm(
+          "Zaxira ma’lumotlari joriy ma’lumotlarga qo‘shiladi. Davom etasizmi?"
+        )) return;
+
+        entries.forEach(([key, value]) => {
+          localStorage.setItem(key, value);
+        });
+
+        updateStats();
+        showStatus("Ma’lumotlar muvaffaqiyatli tiklandi. Sahifani yangilang.");
+      } catch (error) {
+        showStatus("Xatolik: zaxira faylini o‘qib bo‘lmadi.");
+      }
+
+      fileInput.value = "";
+    };
+
+    reader.readAsText(file);
+  });
+
+  updateStats();
+})();
+</script>
+
+</body>
+</html>
